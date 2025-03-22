@@ -1695,6 +1695,29 @@
             "rid": "win"
           }
         }
+      },
+      "HotelGuru.DataContext/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "9.0.3"
+        },
+        "compile": {
+          "bin/placeholder/HotelGuru.DataContext.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HotelGuru.DataContext.dll": {}
+        }
+      },
+      "HotelGuru.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/HotelGuru.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HotelGuru.Services.dll": {}
+        }
       }
     }
   },
@@ -5156,10 +5179,22 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "HotelGuru.DataContext/1.0.0": {
+      "type": "project",
+      "path": "../HotelGuru.DataContext/HotelGuru.DataContext.csproj",
+      "msbuildProject": "../HotelGuru.DataContext/HotelGuru.DataContext.csproj"
+    },
+    "HotelGuru.Services/1.0.0": {
+      "type": "project",
+      "path": "../HotelGuru.Services/HotelGuru.Services.csproj",
+      "msbuildProject": "../HotelGuru.Services/HotelGuru.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "HotelGuru.DataContext >= 1.0.0",
+      "HotelGuru.Services >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.3",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.3",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.3",
@@ -5200,7 +5235,14 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {
+              "projectPath": "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj"
+            },
+            "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru.Services\\HotelGuru.Services.csproj": {
+              "projectPath": "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru.Services\\HotelGuru.Services.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

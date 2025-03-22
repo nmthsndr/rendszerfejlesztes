@@ -1,0 +1,8 @@
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.csproj.AssemblyReference.cache
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.AssemblyInfoInputs.cache
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.AssemblyInfo.cs
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.csproj.CoreCompileInputs.cache
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.sourcelink.json

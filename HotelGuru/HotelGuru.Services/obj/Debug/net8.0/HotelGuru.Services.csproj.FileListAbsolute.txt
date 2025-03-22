@@ -1,0 +1,12 @@
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\bin\Debug\net8.0\HotelGuru.Services.deps.json
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\bin\Debug\net8.0\HotelGuru.Services.dll
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\bin\Debug\net8.0\HotelGuru.Services.pdb
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.AssemblyInfoInputs.cache
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.AssemblyInfo.cs
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.csproj.CoreCompileInputs.cache
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.sourcelink.json
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.dll
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\refint\HotelGuru.Services.dll
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.pdb
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\ref\HotelGuru.Services.dll
