@@ -7,12 +7,8 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
-build_property.RootNamespace = HotelGuru.DataContext
-<<<<<<< HEAD
-build_property.ProjectDir = C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\
-=======
-build_property.ProjectDir = C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\
->>>>>>> d443fec93e3fa5219cf70cb7ccdcc3dc70c93ba6
+build_property.RootNamespace = HotelGuru.Services
+build_property.ProjectDir = C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
