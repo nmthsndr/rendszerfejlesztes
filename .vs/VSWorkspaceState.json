@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\HotelGuru",
+    "\\HotelGuru\\HotelGuru.DataContext",
+    "\\HotelGuru\\HotelGuru.DataContext\\Entities",
+    "\\HotelGuru\\HotelGuru\\obj"
   ],
+  "SelectedNode": "\\HotelGuru\\HotelGuru.DataContext\\Entities\\User.cs",
   "PreviewInSolutionExplorer": false
 }
