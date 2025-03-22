@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer("Server=(local);Database=HotelGuruDB;Trusted_Connection=True;TrustServerCertificate=True;");
+    options.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=HotelGuruDB;Trusted_Connection=True;TrustServerCertificate=True;");
 });
 
 builder.Services.AddEndpointsApiExplorer();
