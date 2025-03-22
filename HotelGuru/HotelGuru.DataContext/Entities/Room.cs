@@ -14,6 +14,5 @@ namespace HotelGuru.DataContext.Entities
         public bool Avaible { get; set; }
         public int UserId { get; set; }
         public Reservation Reservation { get; set; }
-        public List<ExtraService> ExtraServices { get; set; }
     }
 }
