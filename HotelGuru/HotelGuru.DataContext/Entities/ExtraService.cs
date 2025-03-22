@@ -13,5 +13,6 @@ namespace HotelGuru.DataContext.Entities
         public string Description { get; set; }
         public int Price { get; set; }
 
+        public Invoice Invoice { get; set; }
     }
 }
