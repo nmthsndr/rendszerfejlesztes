@@ -14,5 +14,7 @@ namespace HotelGuru.DataContext.Entities
         public string City { get; set; }
         public string Street { get; set; }
         public int HouseNumber { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }
