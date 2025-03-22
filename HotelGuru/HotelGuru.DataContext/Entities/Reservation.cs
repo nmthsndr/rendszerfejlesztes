@@ -11,7 +11,7 @@ namespace HotelGuru.DataContext.Entities
     public class Reservation
     {
         public int ReservationId { get; set; }
-        public int RoomNumber { get; set; }
+        public int RoomId { get; set; }
         public int UserId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
