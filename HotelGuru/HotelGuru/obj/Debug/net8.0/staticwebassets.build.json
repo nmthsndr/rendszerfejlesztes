@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "ZKpivLhwphVqONAwDo1NBDq7clT/VXUKN8RW4gcPSq8=",
+  "Source": "HotelGuru",
+  "BasePath": "_content/HotelGuru",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
