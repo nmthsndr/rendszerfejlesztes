@@ -11,9 +11,9 @@ namespace HotelGuru.DataContext.Entities
     public class Invoice
     {
         public int Id { get; set; }
-        public int Price { get; set; }
-        public int ExtraPrice { get; set; }
-        public int TotalPrice => Price + ExtraPrice;
+        public decimal Price { get; set; }
+        public decimal ExtraPrice { get; set; }
+        public decimal TotalPrice => Price + ExtraPrice;
 
         public int ReservationId { get; set; }
         public Reservation Reservation { get; set; } = null!;
