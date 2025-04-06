@@ -12,6 +12,20 @@ namespace HotelGuru.Services
             CreateMap<UserRegisterDto, User>();
             CreateMap<UserUpdateDto, User>();
             CreateMap<Address, AddressDto>().ReverseMap();
+
+            // Room Mappings
+            CreateMap<Room, RoomDto>().ReverseMap();
+            CreateMap<RoomCreateDto, Room>();
+            CreateMap<RoomUpdateDto, Room>();
+
+            // Order Mappings
+            CreateMap<Reservation, ReservationDto>();
+            CreateMap<ReservationCreateDto, Reservation>();
+
+            CreateMap<Role, RoleDto>();
+
+            // Hotel Mappings
+            CreateMap<Hotel, HotelDto>();
         }
     }
 }
