@@ -32,7 +32,7 @@ namespace HotelGuru.DataContext.Dtos
     {
         public int RoomId { get; set; }
         public string Type { get; set; }
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; } 
         public bool Avaible { get; set; }
     }
 
