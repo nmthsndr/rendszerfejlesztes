@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HotelGuru.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HotelGuru.Controllers
 {
-    public class ReceptionistController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ReceptionistController : ControllerBase
     {
-        [ApiController]
-        [Route("api/[controller]")]
-        public class UserController : ControllerBase
-        { 
-        
-        }
+        private readonly IReceptionistService _receptionService;
     }
 }
