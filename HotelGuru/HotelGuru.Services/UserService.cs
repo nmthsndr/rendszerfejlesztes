@@ -48,7 +48,7 @@ namespace HotelGuru.Services
 
             if (!user.Roles.Any())
             {
-                user.Roles.Add(await GetDefaultCustomerRoleAsync());
+                user.Roles.Add(await GetDefaultGuestRoleAsync());
             }
 
             await _context.Users.AddAsync(user);
@@ -57,12 +57,12 @@ namespace HotelGuru.Services
             return _mapper.Map<UserDto>(user);
         }
 
-        private async Task<Role> GetDefaultCustomerRoleAsync()
+        private async Task<Role> GetDefaultGuestRoleAsync()
         {
-            var customerRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Customer");
+            var customerRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Guest");
             if (customerRole == null)
             {
-                customerRole = new Role { Name = "Customer" };
+                customerRole = new Role { Name = "Guest" };
                 await _context.Roles.AddAsync(customerRole);
                 await _context.SaveChangesAsync();
             }
