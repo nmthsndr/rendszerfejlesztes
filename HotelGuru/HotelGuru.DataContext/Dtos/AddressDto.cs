@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HotelGuru.DataContext.Dtos
 {
-    internal class AddressDto
+    public class AddressDto
     {
         public int Id { get; set; }
         public int ZipCode { get; set; }
