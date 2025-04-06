@@ -9,16 +9,19 @@ namespace HotelGuru.Services
 {
     public interface IAdminService
     {
-        Task<bool> AddRoomAsync(RoomDto roomDto);
         Task<bool> UpdateRoomAsync(int roomId, RoomDto roomDto);
         Task<bool> DeleteRoomAsync(int roomId);
         Task<IEnumerable<RoomDto>> GetAllRoomsAsync();
     }
     public class AdminService : IAdminService
     {
-        public Task<bool> AddRoomAsync(RoomDto roomDto)
+        private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
+
+        public AdminService(AppDbContext context, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _context = context;
+            _mapper = mapper;
         }
 
         public Task<bool> DeleteRoomAsync(int roomId)

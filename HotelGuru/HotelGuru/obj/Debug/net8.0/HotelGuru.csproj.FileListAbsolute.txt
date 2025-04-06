@@ -584,3 +584,4 @@ C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.pdb
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.genruntimeconfig.cache
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\ref\HotelGuru.dll
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\bin\Debug\net8.0\AutoMapper.dll

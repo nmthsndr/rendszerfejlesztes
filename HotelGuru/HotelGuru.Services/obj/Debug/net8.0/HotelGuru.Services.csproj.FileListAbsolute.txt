@@ -22,3 +22,7 @@ C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\refint\HotelGuru.Services.dll
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.pdb
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\ref\HotelGuru.Services.dll
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\bin\Debug\net8.0\HotelGuru.DataContext.dll
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\bin\Debug\net8.0\HotelGuru.DataContext.pdb
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.csproj.AssemblyReference.cache
+C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGur.7C47C761.Up2Date
