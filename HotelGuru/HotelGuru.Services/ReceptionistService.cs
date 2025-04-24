@@ -84,5 +84,10 @@ namespace HotelGuru.Services
 
             return invoice;
         }
+
+        Task<bool> IReceptionistService.CreateInvoiceAsync(int reservationId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
