@@ -22,3 +22,15 @@ C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\ob
 C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\refint\HotelGuru.Services.dll
 C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.pdb
 C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\ref\HotelGuru.Services.dll
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\bin\Debug\net8.0\HotelGuru.Services.deps.json
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\bin\Debug\net8.0\HotelGuru.Services.dll
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\bin\Debug\net8.0\HotelGuru.Services.pdb
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.AssemblyInfoInputs.cache
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.AssemblyInfo.cs
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.csproj.CoreCompileInputs.cache
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.sourcelink.json
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.dll
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\refint\HotelGuru.Services.dll
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.pdb
+D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\ref\HotelGuru.Services.dll

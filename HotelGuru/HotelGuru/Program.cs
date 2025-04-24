@@ -2,8 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using HotelGuru.DataContext.Context;
 using System;
+using Microsoft.Extensions.DependencyInjection;
+using HotelGuru.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<HotelGuruContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("HotelGuruContext") ?? throw new InvalidOperationException("Connection string 'HotelGuruContext' not found.")));
 
 // Add services to the container.
 
