@@ -14,11 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HotelGuru")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7917291c02231e9af78c1848020816eadf04b72e")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90ecfa6751c8748579c7fa1a735fd3ebe8df854a")]
->>>>>>> d443fec93e3fa5219cf70cb7ccdcc3dc70c93ba6
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50cf8f9aef7a101bac2c7ace2d10ccde243f092e")]
 [assembly: System.Reflection.AssemblyProductAttribute("HotelGuru")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HotelGuru")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

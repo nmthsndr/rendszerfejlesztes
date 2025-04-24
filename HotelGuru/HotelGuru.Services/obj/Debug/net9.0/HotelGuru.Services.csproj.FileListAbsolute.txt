@@ -1,0 +1,16 @@
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\bin\Debug\net9.0\HotelGuru.Services.deps.json
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\bin\Debug\net9.0\HotelGuru.Services.dll
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\bin\Debug\net9.0\HotelGuru.Services.pdb
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\bin\Debug\net9.0\HotelGuru.DataContext.dll
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\bin\Debug\net9.0\HotelGuru.DataContext.pdb
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\HotelGuru.Services.csproj.AssemblyReference.cache
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\HotelGuru.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\HotelGuru.Services.AssemblyInfoInputs.cache
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\HotelGuru.Services.AssemblyInfo.cs
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\HotelGuru.Services.csproj.CoreCompileInputs.cache
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\HotelGuru.Services.sourcelink.json
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\HotelGur.7C47C761.Up2Date
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\HotelGuru.Services.dll
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\refint\HotelGuru.Services.dll
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\HotelGuru.Services.pdb
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net9.0\ref\HotelGuru.Services.dll

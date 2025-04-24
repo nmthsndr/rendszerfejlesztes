@@ -1,0 +1,15 @@
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\bin\Debug\net9.0\HotelGuru.DataContext.deps.json
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\bin\Debug\net9.0\HotelGuru.DataContext.runtimeconfig.json
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\bin\Debug\net9.0\HotelGuru.DataContext.dll
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\bin\Debug\net9.0\HotelGuru.DataContext.pdb
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\HotelGuru.DataContext.csproj.AssemblyReference.cache
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\HotelGuru.DataContext.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\HotelGuru.DataContext.AssemblyInfoInputs.cache
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\HotelGuru.DataContext.AssemblyInfo.cs
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\HotelGuru.DataContext.csproj.CoreCompileInputs.cache
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\HotelGuru.DataContext.sourcelink.json
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\HotelGuru.DataContext.dll
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\refint\HotelGuru.DataContext.dll
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\HotelGuru.DataContext.pdb
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\HotelGuru.DataContext.genruntimeconfig.cache
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net9.0\ref\HotelGuru.DataContext.dll
