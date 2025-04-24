@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\Oti\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {}
   },
   "projects": {
@@ -19,6 +20,25 @@
         ],
         "configFilePaths": [
           "C:\\Users\\Oti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+    "D:\\Egyetem\\rendszerfejlesztes2\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {}
+  },
+  "projects": {
+    "D:\\Egyetem\\rendszerfejlesztes2\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Egyetem\\rendszerfejlesztes2\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj",
+        "projectName": "HotelGuru.DataContext",
+        "projectPath": "D:\\Egyetem\\rendszerfejlesztes2\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj",
+        "packagesPath": "C:\\Users\\kovac\\.nuget\\packages\\",
+        "outputPath": "D:\\Egyetem\\rendszerfejlesztes2\\HotelGuru\\HotelGuru.DataContext\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\kovac\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 4b231016575c5f2310420bbb90bfc282246e48bc
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -78,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

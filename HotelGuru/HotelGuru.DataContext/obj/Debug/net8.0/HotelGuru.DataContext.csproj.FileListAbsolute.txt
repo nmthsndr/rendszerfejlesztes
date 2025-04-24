@@ -28,6 +28,7 @@ C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\o
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.pdb
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.genruntimeconfig.cache
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\ref\HotelGuru.DataContext.dll
+<<<<<<< HEAD
 C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\bin\Debug\net8.0\HotelGuru.DataContext.deps.json
 C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\bin\Debug\net8.0\HotelGuru.DataContext.runtimeconfig.json
 C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\bin\Debug\net8.0\HotelGuru.DataContext.dll
@@ -43,3 +44,20 @@ C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj
 C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.pdb
 C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.genruntimeconfig.cache
 C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\ref\HotelGuru.DataContext.dll
+=======
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\bin\Debug\net8.0\HotelGuru.DataContext.deps.json
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\bin\Debug\net8.0\HotelGuru.DataContext.runtimeconfig.json
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\bin\Debug\net8.0\HotelGuru.DataContext.dll
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\bin\Debug\net8.0\HotelGuru.DataContext.pdb
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.csproj.AssemblyReference.cache
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.GeneratedMSBuildEditorConfig.editorconfig
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.AssemblyInfoInputs.cache
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.AssemblyInfo.cs
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.csproj.CoreCompileInputs.cache
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.sourcelink.json
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.dll
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\refint\HotelGuru.DataContext.dll
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.pdb
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\HotelGuru.DataContext.genruntimeconfig.cache
+D:\Egyetem\rendszerfejlesztes2\HotelGuru\HotelGuru.DataContext\obj\Debug\net8.0\ref\HotelGuru.DataContext.dll
+>>>>>>> 4b231016575c5f2310420bbb90bfc282246e48bc
