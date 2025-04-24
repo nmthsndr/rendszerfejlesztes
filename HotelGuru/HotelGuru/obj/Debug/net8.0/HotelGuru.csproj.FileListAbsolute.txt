@@ -585,3 +585,14 @@ C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.genruntimeconfig.cache
 C:\Users\kovac\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\ref\HotelGuru.dll
 C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.csproj.AssemblyReference.cache
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.AssemblyInfoInputs.cache
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.AssemblyInfo.cs
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.csproj.CoreCompileInputs.cache
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.sourcelink.json
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.dll
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\refint\HotelGuru.dll
+C:\Users\Oti\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.pdb

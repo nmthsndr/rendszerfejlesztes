@@ -10,7 +10,7 @@ namespace HotelGuru.Services
     {
         Task<bool> ConfirmReservationAsync(int reservationId);
         Task<bool> CheckInAsync(int reservationId);
-        Task<bool> CreateInvoiceAsync(int reservationId);
+        Task<bool> CreateInvoiceAsync(int reservationId); // Updated to match the return type
     }
     internal class ReceptionistService : IReceptionistService
     {
@@ -25,12 +25,10 @@ namespace HotelGuru.Services
         public async Task<bool> ConfirmReservationAsync(int reservationId)
         {
             var reservation = await _context.Reservations.FindAsync(reservationId);
-            if(reservation == null)
+            if (reservation == null)
             {
                 throw new KeyNotFoundException("Reservation not found.");
             }
-
-            //??????
 
             foreach (var room in reservation.Rooms)
             {
@@ -44,7 +42,7 @@ namespace HotelGuru.Services
         public async Task<bool> CheckInAsync(int reservationId)
         {
             var reservation = await _context.Reservations.FindAsync(reservationId);
-            if(reservation == null)
+            if (reservation == null)
             {
                 throw new KeyNotFoundException("Reservation not found.");
             }
@@ -57,7 +55,7 @@ namespace HotelGuru.Services
             return true;
         }
 
-        public async Task<Invoice> CreateInvoiceAsync(int reservationId)
+        public async Task<bool> CreateInvoiceAsync(int reservationId) // Updated to match the interface
         {
             var reservation = await _context.Reservations.FindAsync(reservationId);
             if (reservation == null)
@@ -82,7 +80,10 @@ namespace HotelGuru.Services
                 ExtraPrice = extrasprice
             };
 
-            return invoice;
+            await _context.Invoices.AddAsync(invoice);
+            await _context.SaveChangesAsync();
+
+            return true; // Return true to indicate success
         }
     }
 }
