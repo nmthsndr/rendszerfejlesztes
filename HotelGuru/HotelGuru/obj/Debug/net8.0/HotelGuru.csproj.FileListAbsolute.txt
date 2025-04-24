@@ -456,7 +456,6 @@ C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\n
 C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.HotelGuru.props
 C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.HotelGuru.props
 C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.csproj.Up2Date
 C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.dll
 C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\refint\HotelGuru.dll
@@ -877,3 +876,5 @@ D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\refint\HotelG
 D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.pdb
 D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.genruntimeconfig.cache
 D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\ref\HotelGuru.dll
+C:\Users\Sándor\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.RazorAssemblyInfo.cache
+C:\Users\Sándor\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.RazorAssemblyInfo.cs

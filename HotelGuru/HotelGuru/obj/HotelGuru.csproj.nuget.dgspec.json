@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru\\HotelGuru.csproj": {}
+    "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\hotelguru\\HotelGuru.csproj": {}
   },
   "projects": {
     "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {
@@ -108,7 +108,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {
+                "projectPath": "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -146,14 +150,14 @@
         }
       }
     },
-    "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru\\HotelGuru.csproj": {
+    "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\hotelguru\\HotelGuru.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru\\HotelGuru.csproj",
+        "projectUniqueName": "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\hotelguru\\HotelGuru.csproj",
         "projectName": "HotelGuru",
-        "projectPath": "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru\\HotelGuru.csproj",
+        "projectPath": "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\hotelguru\\HotelGuru.csproj",
         "packagesPath": "C:\\Users\\Sándor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru\\obj\\",
+        "outputPath": "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\hotelguru\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

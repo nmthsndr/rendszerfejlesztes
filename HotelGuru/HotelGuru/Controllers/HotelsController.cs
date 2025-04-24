@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using HotelGuru.DataContext.Context;
+using HotelGuru.Services;
 using HotelGuru.DataContext.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelGuru.Controllers
 {
@@ -9,24 +8,24 @@ namespace HotelGuru.Controllers
     [Route("api/[controller]")]
     public class HotelsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IHotelService _hotelService;
 
-        public HotelsController(AppDbContext context)
+        public HotelsController(IHotelService hotelService)
         {
-            _context = context;
+            _hotelService = hotelService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllHotels()
         {
-            var hotels = await _context.Hotels.ToListAsync();
+            var hotels = await _hotelService.GetAllHotelsAsync();
             return Ok(hotels);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetHotelById(int id)
         {
-            var hotel = await _context.Hotels.FindAsync(id);
+            var hotel = await _hotelService.GetHotelByIdAsync(id);
             if (hotel == null)
             {
                 return NotFound();
@@ -42,49 +41,29 @@ namespace HotelGuru.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Hotels.Add(hotel);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetHotelById), new { id = hotel.Id }, hotel);
+            var createdHotel = await _hotelService.CreateHotelAsync(hotel);
+            return CreatedAtAction(nameof(GetHotelById), new { id = createdHotel.Id }, createdHotel);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateHotel(int id, [FromBody] Hotel hotel)
         {
-            if (id != hotel.Id)
+            if (!await _hotelService.UpdateHotelAsync(id, hotel))
             {
-                return BadRequest();
+                return NotFound();
             }
-
-            _context.Entry(hotel).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Hotels.Any(h => h.Id == id))
-                {
-                    return NotFound();
-                }
-                throw;
-            }
-
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteHotel(int id)
         {
-            var hotel = await _context.Hotels.FindAsync(id);
-            if (hotel == null)
+            if (!await _hotelService.DeleteHotelAsync(id))
             {
                 return NotFound();
             }
-
-            _context.Hotels.Remove(hotel);
-            await _context.SaveChangesAsync();
             return NoContent();
         }
     }
 }
+

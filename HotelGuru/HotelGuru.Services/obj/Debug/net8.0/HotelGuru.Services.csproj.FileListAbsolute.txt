@@ -34,3 +34,7 @@ D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\Hote
 D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\refint\HotelGuru.Services.dll
 D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.pdb
 D:\Egyetem\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\ref\HotelGuru.Services.dll
+C:\Users\Sándor\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\bin\Debug\net8.0\HotelGuru.DataContext.dll
+C:\Users\Sándor\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\bin\Debug\net8.0\HotelGuru.DataContext.pdb
+C:\Users\Sándor\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGuru.Services.csproj.AssemblyReference.cache
+C:\Users\Sándor\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru.Services\obj\Debug\net8.0\HotelGur.7C47C761.Up2Date

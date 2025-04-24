@@ -2109,6 +2109,9 @@
         }
       },
       "HotelGuru.Services/1.0.0": {
+        "dependencies": {
+          "HotelGuru.DataContext": "1.0.0"
+        },
         "runtime": {
           "HotelGuru.Services.dll": {
             "assemblyVersion": "1.0.0.0",

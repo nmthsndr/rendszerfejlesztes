@@ -21,5 +21,15 @@ namespace HotelGuru.DataContext.Context
         public DbSet<ExtraService> ExtraServices { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Room>()
+                .Property(r => r.Price)
+                .HasColumnType("decimal(18,2)"); // Specify precision and scale
+        }
+
     }
+
 }

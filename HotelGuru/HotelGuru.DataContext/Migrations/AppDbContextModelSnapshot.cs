@@ -136,11 +136,11 @@ namespace HotelGuru.DataContext.Migrations
 
             modelBuilder.Entity("HotelGuru.DataContext.Entities.Reservation", b =>
                 {
-                    b.Property<int>("ReservationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -155,7 +155,7 @@ namespace HotelGuru.DataContext.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("ReservationId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
@@ -181,11 +181,11 @@ namespace HotelGuru.DataContext.Migrations
 
             modelBuilder.Entity("HotelGuru.DataContext.Entities.Room", b =>
                 {
-                    b.Property<int>("RoomId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Avaible")
                         .HasColumnType("bit");
@@ -193,8 +193,8 @@ namespace HotelGuru.DataContext.Migrations
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ReservationId")
                         .HasColumnType("int");
@@ -206,7 +206,7 @@ namespace HotelGuru.DataContext.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("RoomId");
+                    b.HasKey("Id");
 
                     b.HasIndex("HotelId");
 

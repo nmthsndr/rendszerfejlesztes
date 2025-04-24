@@ -4,6 +4,7 @@ using HotelGuru.DataContext.Context;
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using HotelGuru.Data;
+using HotelGuru.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<HotelGuruContext>(options =>
@@ -16,11 +17,24 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=HotelGuruDB;Trusted_Connection=True;TrustServerCertificate=True;");
+    options.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=HotelGuruDB;Trusted_Connection=True;TrustServerCertificate=True;",
+        b => b.MigrationsAssembly("HotelGuru.DataContext")); // Specify the migrations assembly
 });
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<AdminService>();
+builder.Services.AddScoped<ReceptionistService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<RoomService>();
+builder.Services.AddScoped<HotelService>();
+builder.Services.AddScoped<RoleService>();
+builder.Services.AddScoped<AddressService>();
+builder.Services.AddScoped<ExtraServiceService>();
+builder.Services.AddScoped<ReservationService>();
+builder.Services.AddScoped<InvoiceService>();
+
 
 var app = builder.Build();
 

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HotelGuru.DataContext\HotelGuru.DataContext.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using HotelGuru.DataContext.Context;
+using HotelGuru.Services;
 using HotelGuru.DataContext.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelGuru.Controllers
 {
@@ -9,24 +8,24 @@ namespace HotelGuru.Controllers
     [Route("api/[controller]")]
     public class AddressesController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IAddressService _addressService;
 
-        public AddressesController(AppDbContext context)
+        public AddressesController(IAddressService addressService)
         {
-            _context = context;
+            _addressService = addressService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllAddresses()
         {
-            var addresses = await _context.Addresses.ToListAsync();
+            var addresses = await _addressService.GetAllAddressesAsync();
             return Ok(addresses);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAddressById(int id)
         {
-            var address = await _context.Addresses.FindAsync(id);
+            var address = await _addressService.GetAddressByIdAsync(id);
             if (address == null)
             {
                 return NotFound();
@@ -42,49 +41,29 @@ namespace HotelGuru.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Addresses.Add(address);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetAddressById), new { id = address.Id }, address);
+            var createdAddress = await _addressService.CreateAddressAsync(address);
+            return CreatedAtAction(nameof(GetAddressById), new { id = createdAddress.Id }, createdAddress);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAddress(int id, [FromBody] Address address)
         {
-            if (id != address.Id)
+            if (!await _addressService.UpdateAddressAsync(id, address))
             {
-                return BadRequest();
+                return NotFound();
             }
-
-            _context.Entry(address).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Addresses.Any(a => a.Id == id))
-                {
-                    return NotFound();
-                }
-                throw;
-            }
-
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAddress(int id)
         {
-            var address = await _context.Addresses.FindAsync(id);
-            if (address == null)
+            if (!await _addressService.DeleteAddressAsync(id))
             {
                 return NotFound();
             }
-
-            _context.Addresses.Remove(address);
-            await _context.SaveChangesAsync();
             return NoContent();
         }
     }
 }
+

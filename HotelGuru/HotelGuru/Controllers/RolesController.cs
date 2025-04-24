@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using HotelGuru.DataContext.Context;
+using HotelGuru.Services;
 using HotelGuru.DataContext.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace HotelGuru.Controllers
 {
@@ -9,24 +8,24 @@ namespace HotelGuru.Controllers
     [Route("api/[controller]")]
     public class RolesController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IRoleService _roleService;
 
-        public RolesController(AppDbContext context)
+        public RolesController(IRoleService roleService)
         {
-            _context = context;
+            _roleService = roleService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllRoles()
         {
-            var roles = await _context.Roles.ToListAsync();
+            var roles = await _roleService.GetAllRolesAsync();
             return Ok(roles);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRoleById(int id)
         {
-            var role = await _context.Roles.FindAsync(id);
+            var role = await _roleService.GetRoleByIdAsync(id);
             if (role == null)
             {
                 return NotFound();
@@ -42,49 +41,29 @@ namespace HotelGuru.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Roles.Add(role);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetRoleById), new { id = role.Id }, role);
+            var createdRole = await _roleService.CreateRoleAsync(role);
+            return CreatedAtAction(nameof(GetRoleById), new { id = createdRole.Id }, createdRole);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateRole(int id, [FromBody] Role role)
         {
-            if (id != role.Id)
+            if (!await _roleService.UpdateRoleAsync(id, role))
             {
-                return BadRequest();
+                return NotFound();
             }
-
-            _context.Entry(role).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Roles.Any(r => r.Id == id))
-                {
-                    return NotFound();
-                }
-                throw;
-            }
-
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRole(int id)
         {
-            var role = await _context.Roles.FindAsync(id);
-            if (role == null)
+            if (!await _roleService.DeleteRoleAsync(id))
             {
                 return NotFound();
             }
-
-            _context.Roles.Remove(role);
-            await _context.SaveChangesAsync();
             return NoContent();
         }
     }
 }
+
