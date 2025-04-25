@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "n+ddWbn7bdc=",
+  "dgSpecHash": "3+ti8Fqq/KY=",
   "success": true,
   "projectFilePath": "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru.Services\\HotelGuru.Services.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Felhasználó\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\Felhasználó\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Felhasználó\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\Felhasználó\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
