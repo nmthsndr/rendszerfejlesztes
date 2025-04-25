@@ -3,9 +3,8 @@
     "",
     "\\HotelGuru",
     "\\HotelGuru\\HotelGuru.DataContext",
-    "\\HotelGuru\\HotelGuru.DataContext\\Entities",
-    "\\HotelGuru\\HotelGuru\\obj"
+    "\\HotelGuru\\HotelGuru.DataContext\\Entities"
   ],
-  "SelectedNode": "\\HotelGuru\\HotelGuru.DataContext\\Entities\\User.cs",
+  "SelectedNode": "\\HotelGuru\\HotelGuru.sln",
   "PreviewInSolutionExplorer": false
 }

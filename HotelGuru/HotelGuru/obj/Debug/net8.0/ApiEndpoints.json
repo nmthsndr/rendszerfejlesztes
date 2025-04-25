@@ -112,13 +112,13 @@
   {
     "ContainingType": "HotelGuru.Controllers.AdminController",
     "Method": "UpdateRoomDetails",
-    "RelativePath": "api/Admin/rooms/{roomId}",
+    "RelativePath": "api/Admin/rooms/{Id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "roomId",
+        "Name": "Id",
         "Type": "System.Int32",
         "IsRequired": true
       },
@@ -133,13 +133,13 @@
   {
     "ContainingType": "HotelGuru.Controllers.AdminController",
     "Method": "SetRoomMaintenance",
-    "RelativePath": "api/Admin/rooms/{roomId}/maintenance",
+    "RelativePath": "api/Admin/rooms/{Id}/maintenance",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "roomId",
+        "Name": "Id",
         "Type": "System.Int32",
         "IsRequired": true
       },
@@ -154,13 +154,13 @@
   {
     "ContainingType": "HotelGuru.Controllers.AdminController",
     "Method": "UpdateRoomStatus",
-    "RelativePath": "api/Admin/rooms/{roomId}/status",
+    "RelativePath": "api/Admin/rooms/{Id}/status",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "roomId",
+        "Name": "Id",
         "Type": "System.Int32",
         "IsRequired": true
       },

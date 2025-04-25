@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelGuru.DataContext.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250425023715_fullEdit")]
-    partial class fullEdit
+    [Migration("20250425212505_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,15 +69,15 @@ namespace HotelGuru.DataContext.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("InvoiceId")
+                    b.Property<int?>("InvoiceId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("RoomId")
                         .HasColumnType("int");
@@ -120,11 +120,11 @@ namespace HotelGuru.DataContext.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ExtraPrice")
-                        .HasColumnType("int");
+                    b.Property<decimal>("ExtraPrice")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ReservationId")
                         .HasColumnType("int");
@@ -190,8 +190,9 @@ namespace HotelGuru.DataContext.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Avaible")
-                        .HasColumnType("bit");
+                    b.Property<bool>("Available")
+                        .HasColumnType("bit")
+                        .HasColumnName("Available");
 
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
@@ -199,14 +200,14 @@ namespace HotelGuru.DataContext.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ReservationId")
+                    b.Property<int?>("ReservationId")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -274,8 +275,7 @@ namespace HotelGuru.DataContext.Migrations
                     b.HasOne("HotelGuru.DataContext.Entities.Invoice", "Invoice")
                         .WithMany()
                         .HasForeignKey("InvoiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("HotelGuru.DataContext.Entities.Room", null)
                         .WithMany("ExtraServices")
@@ -317,8 +317,7 @@ namespace HotelGuru.DataContext.Migrations
                     b.HasOne("HotelGuru.DataContext.Entities.Reservation", "Reservation")
                         .WithMany("Rooms")
                         .HasForeignKey("ReservationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Hotel");
 
@@ -347,8 +346,7 @@ namespace HotelGuru.DataContext.Migrations
 
             modelBuilder.Entity("HotelGuru.DataContext.Entities.Reservation", b =>
                 {
-                    b.Navigation("Invoice")
-                        .IsRequired();
+                    b.Navigation("Invoice");
 
                     b.Navigation("Rooms");
                 });

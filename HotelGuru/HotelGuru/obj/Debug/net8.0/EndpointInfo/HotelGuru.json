@@ -176,14 +176,14 @@
         }
       }
     },
-    "/api/Admin/rooms/{roomId}/status": {
+    "/api/Admin/rooms/{Id}/status": {
       "post": {
         "tags": [
           "Admin"
         ],
         "parameters": [
           {
-            "name": "roomId",
+            "name": "Id",
             "in": "path",
             "required": true,
             "schema": {
@@ -206,14 +206,14 @@
         }
       }
     },
-    "/api/Admin/rooms/{roomId}": {
+    "/api/Admin/rooms/{Id}": {
       "put": {
         "tags": [
           "Admin"
         ],
         "parameters": [
           {
-            "name": "roomId",
+            "name": "Id",
             "in": "path",
             "required": true,
             "schema": {
@@ -248,14 +248,14 @@
         }
       }
     },
-    "/api/Admin/rooms/{roomId}/maintenance": {
+    "/api/Admin/rooms/{Id}/maintenance": {
       "post": {
         "tags": [
           "Admin"
         ],
         "parameters": [
           {
-            "name": "roomId",
+            "name": "Id",
             "in": "path",
             "required": true,
             "schema": {

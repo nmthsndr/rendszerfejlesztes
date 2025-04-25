@@ -20,10 +20,15 @@ namespace HotelGuru.DataContext.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            // Beállítjuk a decimális mezők pontosságát
+            // Set precision for decimal fields
             modelBuilder.Entity<Room>()
                 .Property(r => r.Price)
                 .HasColumnType("decimal(18,2)");
+
+            // Explicitly map the Available property to ensure it's correctly created in the database
+            modelBuilder.Entity<Room>()
+                .Property(r => r.Available)
+                .HasColumnName("Available");
 
             modelBuilder.Entity<Invoice>()
                 .Property(i => i.Price)
@@ -37,27 +42,43 @@ namespace HotelGuru.DataContext.Context
                 .Property(e => e.Price)
                 .HasColumnType("decimal(18,2)");
 
-            // Beállítjuk a kapcsolatokat
+            // Configure relationships
             modelBuilder.Entity<Room>()
                 .HasOne(r => r.Reservation)
                 .WithMany(r => r.Rooms)
-                .HasForeignKey(r => r.Id)
-                .IsRequired(false)  // Opcionális kapcsolat
-                .OnDelete(DeleteBehavior.SetNull);  // Törléskor null-ra állítjuk
+                .HasForeignKey(r => r.ReservationId)  // Using ReservationId instead of Id as FK
+                .IsRequired(false)  // Optional relationship
+                .OnDelete(DeleteBehavior.SetNull);  // Set to null on delete
 
             modelBuilder.Entity<ExtraService>()
                 .HasOne(e => e.Invoice)
                 .WithMany()
                 .HasForeignKey(e => e.InvoiceId)
-                .IsRequired(false)  // Opcionális kapcsolat
-                .OnDelete(DeleteBehavior.SetNull);  // Törléskor null-ra állítjuk
+                .IsRequired(false)  // Optional relationship
+                .OnDelete(DeleteBehavior.SetNull);  // Set to null on delete
 
             modelBuilder.Entity<Invoice>()
                 .HasOne(i => i.Reservation)
                 .WithOne(r => r.Invoice)
                 .HasForeignKey<Invoice>(i => i.ReservationId);
 
-            // További kapcsolatok és beállítások...
+            // In AppDbContext.cs, add to OnModelCreating method:
+
+            // Set decimal field precision
+            modelBuilder.Entity<Room>()
+                .Property(r => r.Price)
+                .HasColumnType("decimal(18,2)");
+
+            // Map between entity property names and database column names
+            modelBuilder.Entity<Room>()
+                .Property(e => e.Id)
+                .HasColumnName("Id");
+
+            modelBuilder.Entity<Reservation>()
+                .Property(e => e.Id)
+                .HasColumnName("Id");
+
+            // Additional relationships and configurations...
         }
     }
 }

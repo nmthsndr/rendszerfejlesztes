@@ -22,10 +22,10 @@ namespace HotelGuru.Controllers
             return Ok(rooms);
         }
 
-        [HttpPost("rooms/{roomId}/status")]
-        public async Task<IActionResult> UpdateRoomStatus(int roomId, [FromQuery] bool isAvailable)
+        [HttpPost("rooms/{Id}/status")]
+        public async Task<IActionResult> UpdateRoomStatus(int Id, [FromQuery] bool isAvailable)
         {
-            var result = await _adminService.UpdateRoomStatusAsync(roomId, isAvailable);
+            var result = await _adminService.UpdateRoomStatusAsync(Id, isAvailable);
             if (!result)
             {
                 return NotFound("Room not found.");
@@ -33,15 +33,15 @@ namespace HotelGuru.Controllers
             return Ok(new { message = "Room status updated successfully." });
         }
 
-        [HttpPut("rooms/{roomId}")]
-        public async Task<IActionResult> UpdateRoomDetails(int roomId, [FromBody] RoomUpdateDto roomDto)
+        [HttpPut("rooms/{Id}")]
+        public async Task<IActionResult> UpdateRoomDetails(int Id, [FromBody] RoomUpdateDto roomDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var updatedRoom = await _adminService.UpdateRoomDetailsAsync(roomId, roomDto);
+            var updatedRoom = await _adminService.UpdateRoomDetailsAsync(Id, roomDto);
             if (updatedRoom == null)
             {
                 return NotFound("Room not found.");
@@ -49,10 +49,10 @@ namespace HotelGuru.Controllers
             return Ok(updatedRoom);
         }
 
-        [HttpPost("rooms/{roomId}/maintenance")]
-        public async Task<IActionResult> SetRoomMaintenance(int roomId, [FromQuery] bool isUnderMaintenance)
+        [HttpPost("rooms/{Id}/maintenance")]
+        public async Task<IActionResult> SetRoomMaintenance(int Id, [FromQuery] bool isUnderMaintenance)
         {
-            var result = await _adminService.SetRoomMaintenanceAsync(roomId, isUnderMaintenance);
+            var result = await _adminService.SetRoomMaintenanceAsync(Id, isUnderMaintenance);
             if (!result)
             {
                 return NotFound("Room not found.");

@@ -182,10 +182,14 @@ namespace HotelGuru.DataContext.Migrations
             modelBuilder.Entity("HotelGuru.DataContext.Entities.Room", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<bool>("Available")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("Available");
 
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
@@ -206,6 +210,8 @@ namespace HotelGuru.DataContext.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("HotelId");
+
+                    b.HasIndex("ReservationId");
 
                     b.ToTable("Rooms");
                 });
@@ -307,7 +313,7 @@ namespace HotelGuru.DataContext.Migrations
 
                     b.HasOne("HotelGuru.DataContext.Entities.Reservation", "Reservation")
                         .WithMany("Rooms")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("ReservationId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Hotel");
