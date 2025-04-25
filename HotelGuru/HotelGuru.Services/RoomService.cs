@@ -50,6 +50,9 @@ namespace HotelGuru.Services
         {
             var room = _mapper.Map<Room>(roomDto);
 
+            // Alapértelmezetten a szobák elérhetőek
+            room.Available = true;
+
             _context.Rooms.Add(room);
             await _context.SaveChangesAsync();
 

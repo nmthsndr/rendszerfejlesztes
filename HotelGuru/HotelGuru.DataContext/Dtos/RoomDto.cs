@@ -13,7 +13,7 @@ namespace HotelGuru.DataContext.Dtos
         public int Id { get; set; }
         public string Type { get; set; }
         public decimal Price { get; set; }
-        public bool Avaible { get; set; }
+        public bool Available { get; set; }
         public HotelDto Hotel { get; set; }
     }
 
@@ -21,19 +21,18 @@ namespace HotelGuru.DataContext.Dtos
     {
         [Required]
         public string Type { get; set; }
-        
+
         [Required]
         [Range(0.01, double.MaxValue)]
         public decimal Price { get; set; }
-        public bool Avaible { get; set; }
+        public bool Available { get; set; }
     }
 
     public class RoomUpdateDto
     {
         public int RoomId { get; set; }
         public string Type { get; set; }
-        public decimal? Price { get; set; } 
-        public bool Avaible { get; set; }
+        public decimal? Price { get; set; }
+        public bool Available { get; set; }
     }
-
 }

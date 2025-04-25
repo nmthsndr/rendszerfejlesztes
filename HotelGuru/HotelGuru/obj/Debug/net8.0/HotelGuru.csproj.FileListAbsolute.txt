@@ -881,3 +881,5 @@ C:\Users\Sándor\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\n
 C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.RazorAssemblyInfo.cache
 C:\Users\Felhasználó\Desktop\Hotelguru\HotelGuru\HotelGuru\obj\Debug\net8.0\HotelGuru.RazorAssemblyInfo.cs
+C:\Users\Sándor\source\repos\rendszerfejlesztes\HotelGuru\HotelGuru\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\Sándor\Source\Repos\rendszerfejlesztes\HotelGuru\HotelGuru\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

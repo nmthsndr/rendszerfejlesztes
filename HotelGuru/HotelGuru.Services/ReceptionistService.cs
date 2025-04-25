@@ -68,7 +68,7 @@ namespace HotelGuru.Services
             // For now, we'll just ensure the rooms are marked as not available
             foreach (var room in reservation.Rooms)
             {
-                room.Avaible = false;
+                room.Available = false; 
             }
 
             await _context.SaveChangesAsync();
@@ -79,7 +79,7 @@ namespace HotelGuru.Services
         {
             var reservation = await _context.Reservations
                 .Include(r => r.Rooms)
-                .FirstOrDefaultAsync(r => r.Id == reservationId);
+                .FirstOrDefaultAsync(r => r.Id == reservationId); 
 
             if (reservation == null)
                 return false;
@@ -94,7 +94,7 @@ namespace HotelGuru.Services
             // For now, we'll just ensure rooms are marked properly
             foreach (var room in reservation.Rooms)
             {
-                room.Avaible = false;
+                room.Available = false;
             }
 
             await _context.SaveChangesAsync();
@@ -107,7 +107,7 @@ namespace HotelGuru.Services
                 .Include(r => r.Rooms)
                     .ThenInclude(r => r.ExtraServices)
                 .Include(r => r.Invoice)
-                .FirstOrDefaultAsync(r => r.Id == reservationId);
+                .FirstOrDefaultAsync(r => r.Id == reservationId); 
 
             if (reservation == null)
                 return null;
@@ -120,16 +120,18 @@ namespace HotelGuru.Services
 
             // Calculate total price
             var totalDays = (reservation.EndDate - reservation.StartDate).Days;
+            if (totalDays <= 0) totalDays = 1; // Minimum 1 day
+
             var roomPrice = reservation.Rooms.Sum(r => r.Price * totalDays);
             var extraServicesPrice = reservation.Rooms
-                .SelectMany(r => r.ExtraServices)
+                .SelectMany(r => r.ExtraServices ?? new List<ExtraService>())
                 .Sum(e => e.Price);
 
             var invoice = new Invoice
             {
                 ReservationId = reservationId,
-                Price = (int)roomPrice,
-                ExtraPrice = extraServicesPrice
+                Price = roomPrice, 
+                ExtraPrice = extraServicesPrice 
             };
 
             _context.Invoices.Add(invoice);

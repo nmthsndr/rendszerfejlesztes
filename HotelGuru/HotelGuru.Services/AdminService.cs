@@ -31,7 +31,7 @@ namespace HotelGuru.Services
             if (room == null)
                 return false;
 
-            room.Avaible = isAvailable;
+            room.Available = isAvailable;
             await _context.SaveChangesAsync();
             return true;
         }
@@ -45,7 +45,6 @@ namespace HotelGuru.Services
             _mapper.Map(roomDto, room);
             await _context.SaveChangesAsync();
 
-            // Reload with includes to return complete data
             room = await _context.Rooms
                 .Include(r => r.Hotel)
                 .FirstOrDefaultAsync(r => r.Id == roomId);
@@ -69,10 +68,8 @@ namespace HotelGuru.Services
             if (room == null)
                 return false;
 
-            // If room is under maintenance, it's not available
-            room.Avaible = !isUnderMaintenance;
+            room.Available = !isUnderMaintenance;
 
-            // In a more complete implementation, we'd have a separate maintenance status field
             await _context.SaveChangesAsync();
             return true;
         }

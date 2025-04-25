@@ -47,7 +47,7 @@ namespace HotelGuru.Controllers
                 int userId = 1; // Placeholder - should come from authenticated user
 
                 var createdReservation = await _reservationService.CreateReservationAsync(reservationDto, userId);
-                return CreatedAtAction(nameof(GetReservationById), new { id = createdReservation.ReservationId }, createdReservation);
+                return CreatedAtAction(nameof(GetReservationById), new { id = createdReservation.Id }, createdReservation);
             }
             catch (InvalidOperationException ex)
             {

@@ -1388,11 +1388,11 @@
             "type": "string"
           },
           "price": {
-            "minimum": 0.01,
+            "minimum": 0,01,
             "type": "number",
             "format": "double"
           },
-          "avaible": {
+          "available": {
             "type": "boolean"
           }
         },
@@ -1414,7 +1414,7 @@
             "format": "double",
             "nullable": true
           },
-          "avaible": {
+          "available": {
             "type": "boolean"
           }
         },

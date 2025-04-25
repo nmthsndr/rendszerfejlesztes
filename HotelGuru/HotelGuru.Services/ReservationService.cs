@@ -72,7 +72,7 @@ namespace HotelGuru.Services
                 .Include(r => r.User)
                 .Include(r => r.Rooms)
                 .Include(r => r.Invoice)
-                .FirstOrDefaultAsync(r => r.Id == reservation.Id);
+                .FirstOrDefaultAsync(r => r.Id == reservation.Id); 
 
             return _mapper.Map<ReservationDto>(reservation!);
         }

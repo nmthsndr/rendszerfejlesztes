@@ -82,13 +82,13 @@ namespace HotelGuru.Services
 
             var roomPrice = reservation.Rooms.Sum(r => r.Price * totalDays);
             var extraServicesPrice = reservation.Rooms
-                .SelectMany(r => r.ExtraServices)
+                .SelectMany(r => r.ExtraServices ?? new List<ExtraService>())
                 .Sum(e => e.Price);
 
             var invoice = new Invoice
             {
                 ReservationId = reservationId,
-                Price = (int)roomPrice,
+                Price = roomPrice,
                 ExtraPrice = extraServicesPrice
             };
 
@@ -104,7 +104,7 @@ namespace HotelGuru.Services
             if (invoice == null)
                 return false;
 
-            invoice.ExtraPrice += (int)additionalCharges;
+            invoice.ExtraPrice += additionalCharges;
             await _context.SaveChangesAsync();
             return true;
         }

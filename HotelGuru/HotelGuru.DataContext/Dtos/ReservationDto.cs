@@ -9,7 +9,7 @@ namespace HotelGuru.DataContext.Dtos
 {
     public class ReservationDto
     {
-        public int ReservationId { get; set; }
+        public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string PaymentMethod { get; set; } = string.Empty;
@@ -24,5 +24,4 @@ namespace HotelGuru.DataContext.Dtos
         [Required]
         public string PaymentMethod { get; set; } = string.Empty;
     }
-
 }

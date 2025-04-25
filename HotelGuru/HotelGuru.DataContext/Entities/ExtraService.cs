@@ -11,8 +11,8 @@ namespace HotelGuru.DataContext.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Price { get; set; }
-
-        public Invoice Invoice { get; set; }
+        public decimal Price { get; set; }
+        public int? InvoiceId { get; set; }
+        public Invoice? Invoice { get; set; }
     }
 }

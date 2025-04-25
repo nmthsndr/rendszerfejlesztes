@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +18,6 @@ namespace HotelGuru.DataContext.Entities
         public int UserId { get; set; }
         public User? User { get; set; }
 
-        public Invoice Invoice { get; set; } = null!; 
+        public Invoice? Invoice { get; set; }
     }
-
 }
