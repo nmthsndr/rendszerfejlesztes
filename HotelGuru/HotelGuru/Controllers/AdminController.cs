@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using HotelGuru.Services;
 using HotelGuru.DataContext.Dtos;
-using HotelGuru.DataContext.Entities;
 
 namespace HotelGuru.Controllers
 {
@@ -16,35 +15,49 @@ namespace HotelGuru.Controllers
             _adminService = adminService;
         }
 
-        [HttpPost("UpdateRoomStatus")]
-        public async Task<IActionResult> UpdateRoomStatus(int roomId, bool isAvailable)
+        [HttpGet("rooms")]
+        public async Task<IActionResult> GetAllRoomsWithStatus()
+        {
+            var rooms = await _adminService.GetAllRoomsWithStatusAsync();
+            return Ok(rooms);
+        }
+
+        [HttpPost("rooms/{roomId}/status")]
+        public async Task<IActionResult> UpdateRoomStatus(int roomId, [FromQuery] bool isAvailable)
         {
             var result = await _adminService.UpdateRoomStatusAsync(roomId, isAvailable);
             if (!result)
             {
                 return NotFound("Room not found.");
             }
-            return Ok("Room status updated successfully.");
+            return Ok(new { message = "Room status updated successfully." });
         }
 
-        [HttpPut("UpdateRoomDetails")]
-        public async Task<IActionResult> UpdateRoomDetails(int roomId, [FromBody] RoomDto roomDto)
+        [HttpPut("rooms/{roomId}")]
+        public async Task<IActionResult> UpdateRoomDetails(int roomId, [FromBody] RoomUpdateDto roomDto)
         {
-            var updatedRoom = new Room
+            if (!ModelState.IsValid)
             {
-                Id = roomDto.Id,
-                Type = roomDto.Type,
-                Price = roomDto.Price,
-                Avaible = roomDto.Avaible,
-                HotelId = roomDto.Hotel.Id
-            };
+                return BadRequest(ModelState);
+            }
 
-            var result = await _adminService.UpdateRoomDetailsAsync(roomId, updatedRoom);
+            var updatedRoom = await _adminService.UpdateRoomDetailsAsync(roomId, roomDto);
+            if (updatedRoom == null)
+            {
+                return NotFound("Room not found.");
+            }
+            return Ok(updatedRoom);
+        }
+
+        [HttpPost("rooms/{roomId}/maintenance")]
+        public async Task<IActionResult> SetRoomMaintenance(int roomId, [FromQuery] bool isUnderMaintenance)
+        {
+            var result = await _adminService.SetRoomMaintenanceAsync(roomId, isUnderMaintenance);
             if (!result)
             {
                 return NotFound("Room not found.");
             }
-            return Ok("Room details updated successfully.");
+            return Ok(new { message = $"Room maintenance status set to {isUnderMaintenance}." });
         }
     }
 }

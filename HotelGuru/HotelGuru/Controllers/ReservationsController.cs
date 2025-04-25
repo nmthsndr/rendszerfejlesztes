@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using HotelGuru.DataContext.Context;
-using HotelGuru.DataContext.Entities;
-using Microsoft.EntityFrameworkCore;
+using HotelGuru.Services;
+using HotelGuru.DataContext.Dtos;
 
 namespace HotelGuru.Controllers
 {
@@ -9,24 +8,24 @@ namespace HotelGuru.Controllers
     [Route("api/[controller]")]
     public class ReservationsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IReservationService _reservationService;
 
-        public ReservationsController(AppDbContext context)
+        public ReservationsController(IReservationService reservationService)
         {
-            _context = context;
+            _reservationService = reservationService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllReservations()
         {
-            var reservations = await _context.Reservations.ToListAsync();
+            var reservations = await _reservationService.GetAllReservationsAsync();
             return Ok(reservations);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetReservationById(int id)
         {
-            var reservation = await _context.Reservations.FindAsync(id);
+            var reservation = await _reservationService.GetReservationByIdAsync(id);
             if (reservation == null)
             {
                 return NotFound();
@@ -35,56 +34,50 @@ namespace HotelGuru.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateReservation([FromBody] Reservation reservation)
+        public async Task<IActionResult> CreateReservation([FromBody] ReservationCreateDto reservationDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Reservations.Add(reservation);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetReservationById), new { id = reservation.Id }, reservation);
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateReservation(int id, [FromBody] Reservation reservation)
-        {
-            if (id != reservation.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(reservation).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Reservations.Any(r => r.Id == id))
-                {
-                    return NotFound();
-                }
-                throw;
-            }
+                // In a real application, you'd get the user ID from the authentication context
+                int userId = 1; // Placeholder - should come from authenticated user
 
-            return NoContent();
+                var createdReservation = await _reservationService.CreateReservationAsync(reservationDto, userId);
+                return CreatedAtAction(nameof(GetReservationById), new { id = createdReservation.ReservationId }, createdReservation);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteReservation(int id)
+        public async Task<IActionResult> CancelReservation(int id)
         {
-            var reservation = await _context.Reservations.FindAsync(id);
-            if (reservation == null)
+            try
             {
-                return NotFound();
+                var result = await _reservationService.CancelReservationAsync(id);
+                if (!result)
+                {
+                    return NotFound();
+                }
+                return NoContent();
             }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
-            _context.Reservations.Remove(reservation);
-            await _context.SaveChangesAsync();
-            return NoContent();
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetUserReservations(int userId)
+        {
+            var reservations = await _reservationService.GetUserReservationsAsync(userId);
+            return Ok(reservations);
         }
     }
 }

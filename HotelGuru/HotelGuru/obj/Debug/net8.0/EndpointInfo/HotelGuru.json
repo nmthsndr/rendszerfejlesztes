@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "HotelGuru",
-    "version": "1.0"
+    "title": "HotelGuru API",
+    "version": "v1"
   },
   "paths": {
     "/api/Addresses": {
@@ -10,35 +10,6 @@
         "tags": [
           "Addresses"
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Addresses"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Address"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Address"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Address"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -87,17 +58,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Address"
+                "$ref": "#/components/schemas/AddressDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Address"
+                "$ref": "#/components/schemas/AddressDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Address"
+                "$ref": "#/components/schemas/AddressDto"
               }
             }
           }
@@ -130,7 +101,82 @@
         }
       }
     },
-    "/api/Admin/UpdateRoomStatus": {
+    "/api/Addresses/user/{userId}": {
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Addresses"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddressDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/rooms": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/rooms/{roomId}/status": {
       "post": {
         "tags": [
           "Admin"
@@ -138,7 +184,8 @@
         "parameters": [
           {
             "name": "roomId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -159,7 +206,7 @@
         }
       }
     },
-    "/api/Admin/UpdateRoomDetails": {
+    "/api/Admin/rooms/{roomId}": {
       "put": {
         "tags": [
           "Admin"
@@ -167,7 +214,8 @@
         "parameters": [
           {
             "name": "roomId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -178,21 +226,51 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RoomDto"
+                "$ref": "#/components/schemas/RoomUpdateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RoomDto"
+                "$ref": "#/components/schemas/RoomUpdateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RoomDto"
+                "$ref": "#/components/schemas/RoomUpdateDto"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/rooms/{roomId}/maintenance": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "roomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "isUnderMaintenance",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -219,17 +297,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ExtraService"
+                "$ref": "#/components/schemas/ExtraServiceDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ExtraService"
+                "$ref": "#/components/schemas/ExtraServiceDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ExtraService"
+                "$ref": "#/components/schemas/ExtraServiceDto"
               }
             }
           }
@@ -282,17 +360,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ExtraService"
+                "$ref": "#/components/schemas/ExtraServiceDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ExtraService"
+                "$ref": "#/components/schemas/ExtraServiceDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ExtraService"
+                "$ref": "#/components/schemas/ExtraServiceDto"
               }
             }
           }
@@ -344,17 +422,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Hotel"
+                "$ref": "#/components/schemas/HotelDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Hotel"
+                "$ref": "#/components/schemas/HotelDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Hotel"
+                "$ref": "#/components/schemas/HotelDto"
               }
             }
           }
@@ -407,17 +485,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Hotel"
+                "$ref": "#/components/schemas/HotelDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Hotel"
+                "$ref": "#/components/schemas/HotelDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Hotel"
+                "$ref": "#/components/schemas/HotelDto"
               }
             }
           }
@@ -460,35 +538,6 @@
             "description": "OK"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Invoices"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Invoice"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Invoice"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Invoice"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
       }
     },
     "/api/Invoices/{id}": {
@@ -507,46 +556,6 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Invoices"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Invoice"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Invoice"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Invoice"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -575,15 +584,37 @@
         }
       }
     },
-    "/api/Receptionist/ConfirmReservation": {
-      "post": {
+    "/api/Invoices/reservation/{reservationId}": {
+      "get": {
         "tags": [
-          "Receptionist"
+          "Invoices"
         ],
         "parameters": [
           {
             "name": "reservationId",
-            "in": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -597,7 +628,50 @@
         }
       }
     },
-    "/api/Receptionist/CheckInGuest": {
+    "/api/Invoices/{id}/additional-charges": {
+      "put": {
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "additionalCharges",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Receptionist/pending-reservations": {
+      "get": {
+        "tags": [
+          "Receptionist"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Receptionist/confirm-reservation/{reservationId}": {
       "post": {
         "tags": [
           "Receptionist"
@@ -605,7 +679,8 @@
         "parameters": [
           {
             "name": "reservationId",
-            "in": "query",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -619,7 +694,7 @@
         }
       }
     },
-    "/api/Receptionist/GenerateInvoice": {
+    "/api/Receptionist/check-in/{reservationId}": {
       "post": {
         "tags": [
           "Receptionist"
@@ -627,7 +702,31 @@
         "parameters": [
           {
             "name": "reservationId",
-            "in": "query",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Receptionist/generate-invoice/{reservationId}": {
+      "post": {
+        "tags": [
+          "Receptionist"
+        ],
+        "parameters": [
+          {
+            "name": "reservationId",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -660,17 +759,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Reservation"
+                "$ref": "#/components/schemas/ReservationCreateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Reservation"
+                "$ref": "#/components/schemas/ReservationCreateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Reservation"
+                "$ref": "#/components/schemas/ReservationCreateDto"
               }
             }
           }
@@ -704,7 +803,7 @@
           }
         }
       },
-      "put": {
+      "delete": {
         "tags": [
           "Reservations"
         ],
@@ -719,38 +818,21 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Reservation"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Reservation"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Reservation"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/api/Reservations/user/{userId}": {
+      "get": {
         "tags": [
           "Reservations"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "userId",
             "in": "path",
             "required": true,
             "schema": {
@@ -785,17 +867,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Role"
+                "$ref": "#/components/schemas/RoleDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Role"
+                "$ref": "#/components/schemas/RoleDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Role"
+                "$ref": "#/components/schemas/RoleDto"
               }
             }
           }
@@ -848,17 +930,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Role"
+                "$ref": "#/components/schemas/RoleDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Role"
+                "$ref": "#/components/schemas/RoleDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Role"
+                "$ref": "#/components/schemas/RoleDto"
               }
             }
           }
@@ -870,6 +952,51 @@
         }
       },
       "delete": {
+        "tags": [
+          "Roles"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Roles/name/{name}": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Roles/{id}/users": {
+      "get": {
         "tags": [
           "Roles"
         ],
@@ -910,17 +1037,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomCreateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomCreateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomCreateDto"
               }
             }
           }
@@ -973,17 +1100,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomUpdateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomUpdateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Room"
+                "$ref": "#/components/schemas/RoomUpdateDto"
               }
             }
           }
@@ -1021,35 +1148,6 @@
         "tags": [
           "Users"
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/User"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1098,17 +1196,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserUpdateDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserUpdateDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/UserUpdateDto"
               }
             }
           }
@@ -1140,11 +1238,42 @@
           }
         }
       }
+    },
+    "/api/Users/register": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRegisterDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRegisterDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRegisterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "Address": {
+      "AddressDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -1166,18 +1295,11 @@
           "houseNumber": {
             "type": "integer",
             "format": "int32"
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "user": {
-            "$ref": "#/components/schemas/User"
           }
         },
         "additionalProperties": false
       },
-      "ExtraService": {
+      "ExtraServiceDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -1193,36 +1315,8 @@
             "nullable": true
           },
           "price": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "invoice": {
-            "$ref": "#/components/schemas/Invoice"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Hotel": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
-          "roomList": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Room"
-            },
-            "nullable": true
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -1245,43 +1339,14 @@
         },
         "additionalProperties": false
       },
-      "Invoice": {
+      "ReservationCreateDto": {
+        "required": [
+          "endDate",
+          "paymentMethod",
+          "startDate"
+        ],
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "price": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "extraPrice": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "totalPrice": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "reservationId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "reservation": {
-            "$ref": "#/components/schemas/Reservation"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Reservation": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
           "startDate": {
             "type": "string",
             "format": "date-time"
@@ -1291,30 +1356,13 @@
             "format": "date-time"
           },
           "paymentMethod": {
-            "type": "string",
-            "nullable": true
-          },
-          "rooms": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Room"
-            },
-            "nullable": true
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "user": {
-            "$ref": "#/components/schemas/User"
-          },
-          "invoice": {
-            "$ref": "#/components/schemas/Invoice"
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
-      "Role": {
+      "RoleDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -1324,21 +1372,36 @@
           "name": {
             "type": "string",
             "nullable": true
-          },
-          "users": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "Room": {
+      "RoomCreateDto": {
+        "required": [
+          "price",
+          "type"
+        ],
         "type": "object",
         "properties": {
-          "id": {
+          "type": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "price": {
+            "minimum": 0.01,
+            "type": "number",
+            "format": "double"
+          },
+          "avaible": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoomUpdateDto": {
+        "type": "object",
+        "properties": {
+          "roomId": {
             "type": "integer",
             "format": "int32"
           },
@@ -1348,89 +1411,80 @@
           },
           "price": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "avaible": {
             "type": "boolean"
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "reservation": {
-            "$ref": "#/components/schemas/Reservation"
-          },
-          "extraServices": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExtraService"
-            },
-            "nullable": true
-          },
-          "hotelId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "hotel": {
-            "$ref": "#/components/schemas/Hotel"
           }
         },
         "additionalProperties": false
       },
-      "RoomDto": {
+      "UserRegisterDto": {
+        "required": [
+          "email",
+          "password",
+          "username"
+        ],
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "price": {
-            "type": "number",
-            "format": "double"
-          },
-          "avaible": {
-            "type": "boolean"
-          },
-          "hotel": {
-            "$ref": "#/components/schemas/HotelDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
+          "username": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
           },
           "email": {
+            "minLength": 1,
             "type": "string",
-            "nullable": true
+            "format": "email"
+          },
+          "password": {
+            "minLength": 6,
+            "type": "string"
           },
           "phone": {
             "type": "string",
+            "format": "tel",
             "nullable": true
           },
-          "address": {
+          "roleIds": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Address"
+              "type": "integer",
+              "format": "int32"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserUpdateDto": {
+        "required": [
+          "email",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
           },
-          "roles": {
+          "email": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "phone": {
+            "type": "string",
+            "format": "tel",
+            "nullable": true
+          },
+          "roleIds": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Role"
+              "type": "integer",
+              "format": "int32"
             },
             "nullable": true
           }

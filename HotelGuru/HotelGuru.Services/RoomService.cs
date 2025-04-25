@@ -1,60 +1,88 @@
 ﻿using HotelGuru.DataContext.Context;
+using HotelGuru.DataContext.Dtos;
 using HotelGuru.DataContext.Entities;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace HotelGuru.Services
 {
     public interface IRoomService
     {
-        Task<IEnumerable<Room>> GetAllRoomsAsync();
-        Task<Room?> GetRoomByIdAsync(int id);
-        Task<Room> CreateRoomAsync(Room room);
-        Task<bool> UpdateRoomAsync(int id, Room updatedRoom);
+        Task<IEnumerable<RoomDto>> GetAllRoomsAsync();
+        Task<RoomDto?> GetRoomByIdAsync(int id);
+        Task<RoomDto> CreateRoomAsync(RoomCreateDto roomDto);
+        Task<RoomDto?> UpdateRoomAsync(int id, RoomUpdateDto roomDto);
         Task<bool> DeleteRoomAsync(int id);
     }
 
     public class RoomService : IRoomService
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public RoomService(AppDbContext context)
+        public RoomService(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Room>> GetAllRoomsAsync()
+        public async Task<IEnumerable<RoomDto>> GetAllRoomsAsync()
         {
-            return await _context.Rooms.ToListAsync();
+            var rooms = await _context.Rooms
+                .Include(r => r.Hotel)
+                .ToListAsync();
+            return _mapper.Map<IEnumerable<RoomDto>>(rooms);
         }
 
-        public async Task<Room?> GetRoomByIdAsync(int id)
+        public async Task<RoomDto?> GetRoomByIdAsync(int id)
         {
-            return await _context.Rooms.FindAsync(id);
+            var room = await _context.Rooms
+                .Include(r => r.Hotel)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (room == null)
+                return null;
+
+            return _mapper.Map<RoomDto>(room);
         }
 
-        public async Task<Room> CreateRoomAsync(Room room)
+        public async Task<RoomDto> CreateRoomAsync(RoomCreateDto roomDto)
         {
+            var room = _mapper.Map<Room>(roomDto);
+
             _context.Rooms.Add(room);
             await _context.SaveChangesAsync();
-            return room;
+
+            // Reload with includes
+            room = await _context.Rooms
+                .Include(r => r.Hotel)
+                .FirstOrDefaultAsync(r => r.Id == room.Id);
+
+            return _mapper.Map<RoomDto>(room);
         }
 
-        public async Task<bool> UpdateRoomAsync(int id, Room updatedRoom)
+        public async Task<RoomDto?> UpdateRoomAsync(int id, RoomUpdateDto roomDto)
         {
             var room = await _context.Rooms.FindAsync(id);
-            if (room == null) return false;
+            if (room == null)
+                return null;
 
-            room.Type = updatedRoom.Type;
-            room.Price = updatedRoom.Price;
-            room.Avaible = updatedRoom.Avaible;
+            _mapper.Map(roomDto, room);
             await _context.SaveChangesAsync();
-            return true;
+
+            // Reload with includes
+            room = await _context.Rooms
+                .Include(r => r.Hotel)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            return _mapper.Map<RoomDto>(room);
         }
 
         public async Task<bool> DeleteRoomAsync(int id)
         {
             var room = await _context.Rooms.FindAsync(id);
-            if (room == null) return false;
+            if (room == null)
+                return false;
 
             _context.Rooms.Remove(room);
             await _context.SaveChangesAsync();

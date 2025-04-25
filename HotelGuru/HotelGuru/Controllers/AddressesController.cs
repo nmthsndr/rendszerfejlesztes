@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HotelGuru.Services;
-using HotelGuru.DataContext.Entities;
+using HotelGuru.DataContext.Dtos;
 
 namespace HotelGuru.Controllers
 {
@@ -33,32 +33,46 @@ namespace HotelGuru.Controllers
             return Ok(address);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateAddress([FromBody] Address address)
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetAddressesByUserId(int userId)
+        {
+            var addresses = await _addressService.GetAddressesByUserIdAsync(userId);
+            return Ok(addresses);
+        }
+
+        [HttpPost("user/{userId}")]
+        public async Task<IActionResult> CreateAddress(int userId, [FromBody] AddressDto addressDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var createdAddress = await _addressService.CreateAddressAsync(address);
+            var createdAddress = await _addressService.CreateAddressAsync(addressDto, userId);
             return CreatedAtAction(nameof(GetAddressById), new { id = createdAddress.Id }, createdAddress);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAddress(int id, [FromBody] Address address)
+        public async Task<IActionResult> UpdateAddress(int id, [FromBody] AddressDto addressDto)
         {
-            if (!await _addressService.UpdateAddressAsync(id, address))
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var updatedAddress = await _addressService.UpdateAddressAsync(id, addressDto);
+            if (updatedAddress == null)
             {
                 return NotFound();
             }
-            return NoContent();
+            return Ok(updatedAddress);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAddress(int id)
         {
-            if (!await _addressService.DeleteAddressAsync(id))
+            var result = await _addressService.DeleteAddressAsync(id);
+            if (!result)
             {
                 return NotFound();
             }
@@ -66,4 +80,3 @@ namespace HotelGuru.Controllers
         }
     }
 }
-

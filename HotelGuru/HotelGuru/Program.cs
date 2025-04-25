@@ -1,40 +1,40 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using HotelGuru.DataContext.Context;
-using System;
-using Microsoft.Extensions.DependencyInjection;
-using HotelGuru.Data;
 using HotelGuru.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<HotelGuruContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("HotelGuruContext") ?? throw new InvalidOperationException("Connection string 'HotelGuruContext' not found.")));
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+// Use only AppDbContext, remove HotelGuruContext if it exists
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=HotelGuruDB;Trusted_Connection=True;TrustServerCertificate=True;",
-        b => b.MigrationsAssembly("HotelGuru.DataContext")); // Specify the migrations assembly
+    options.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;Database=HotelGuruDB;Trusted_Connection=True;TrustServerCertificate=True;");
 });
 
+// Register services with their interfaces
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IReceptionistService, ReceptionistService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IHotelService, HotelService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IExtraServiceService, ExtraServiceService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 
+// AutoMapper Config
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
+// Swagger configuration
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<AdminService>();
-builder.Services.AddScoped<ReceptionistService>();
-builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<RoomService>();
-builder.Services.AddScoped<HotelService>();
-builder.Services.AddScoped<RoleService>();
-builder.Services.AddScoped<AddressService>();
-builder.Services.AddScoped<ExtraServiceService>();
-builder.Services.AddScoped<ReservationService>();
-builder.Services.AddScoped<InvoiceService>();
-
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelGuru API", Version = "v1" });
+});
 
 var app = builder.Build();
 
@@ -42,13 +42,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotelGuru API v1"));
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

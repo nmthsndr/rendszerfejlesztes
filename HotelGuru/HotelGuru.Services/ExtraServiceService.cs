@@ -1,59 +1,73 @@
 ﻿using HotelGuru.DataContext.Context;
+using HotelGuru.DataContext.Dtos;
 using HotelGuru.DataContext.Entities;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace HotelGuru.Services
 {
     public interface IExtraServiceService
     {
-        Task<IEnumerable<ExtraService>> GetAllExtraServicesAsync();
-        Task<ExtraService?> GetExtraServiceByIdAsync(int id);
-        Task<ExtraService> CreateExtraServiceAsync(ExtraService extraService);
-        Task<bool> UpdateExtraServiceAsync(int id, ExtraService updatedExtraService);
+        Task<IEnumerable<ExtraServiceDto>> GetAllExtraServicesAsync();
+        Task<ExtraServiceDto?> GetExtraServiceByIdAsync(int id);
+        Task<ExtraServiceDto> CreateExtraServiceAsync(ExtraServiceDto extraServiceDto);
+        Task<ExtraServiceDto?> UpdateExtraServiceAsync(int id, ExtraServiceDto extraServiceDto);
         Task<bool> DeleteExtraServiceAsync(int id);
     }
+
     public class ExtraServiceService : IExtraServiceService
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public ExtraServiceService(AppDbContext context)
+        public ExtraServiceService(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ExtraService>> GetAllExtraServicesAsync()
+        public async Task<IEnumerable<ExtraServiceDto>> GetAllExtraServicesAsync()
         {
-            return await _context.ExtraServices.ToListAsync();
+            var extraServices = await _context.ExtraServices.ToListAsync();
+            return _mapper.Map<IEnumerable<ExtraServiceDto>>(extraServices);
         }
 
-        public async Task<ExtraService?> GetExtraServiceByIdAsync(int id)
-        {
-            return await _context.ExtraServices.FindAsync(id);
-        }
-
-        public async Task<ExtraService> CreateExtraServiceAsync(ExtraService extraService)
-        {
-            _context.ExtraServices.Add(extraService);
-            await _context.SaveChangesAsync();
-            return extraService;
-        }
-
-        public async Task<bool> UpdateExtraServiceAsync(int id, ExtraService updatedExtraService)
+        public async Task<ExtraServiceDto?> GetExtraServiceByIdAsync(int id)
         {
             var extraService = await _context.ExtraServices.FindAsync(id);
-            if (extraService == null) return false;
+            if (extraService == null)
+                return null;
 
-            extraService.Name = updatedExtraService.Name;
-            extraService.Description = updatedExtraService.Description;
-            extraService.Price = updatedExtraService.Price;
+            return _mapper.Map<ExtraServiceDto>(extraService);
+        }
+
+        public async Task<ExtraServiceDto> CreateExtraServiceAsync(ExtraServiceDto extraServiceDto)
+        {
+            var extraService = _mapper.Map<ExtraService>(extraServiceDto);
+
+            _context.ExtraServices.Add(extraService);
             await _context.SaveChangesAsync();
-            return true;
+
+            return _mapper.Map<ExtraServiceDto>(extraService);
+        }
+
+        public async Task<ExtraServiceDto?> UpdateExtraServiceAsync(int id, ExtraServiceDto extraServiceDto)
+        {
+            var extraService = await _context.ExtraServices.FindAsync(id);
+            if (extraService == null)
+                return null;
+
+            _mapper.Map(extraServiceDto, extraService);
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<ExtraServiceDto>(extraService);
         }
 
         public async Task<bool> DeleteExtraServiceAsync(int id)
         {
             var extraService = await _context.ExtraServices.FindAsync(id);
-            if (extraService == null) return false;
+            if (extraService == null)
+                return false;
 
             _context.ExtraServices.Remove(extraService);
             await _context.SaveChangesAsync();

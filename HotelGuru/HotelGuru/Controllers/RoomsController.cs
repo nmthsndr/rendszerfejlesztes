@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using HotelGuru.DataContext.Context;
-using HotelGuru.DataContext.Entities;
-using Microsoft.EntityFrameworkCore;
+using HotelGuru.Services;
+using HotelGuru.DataContext.Dtos;
 
 namespace HotelGuru.Controllers
 {
@@ -9,24 +8,24 @@ namespace HotelGuru.Controllers
     [Route("api/[controller]")]
     public class RoomsController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IRoomService _roomService;
 
-        public RoomsController(AppDbContext context)
+        public RoomsController(IRoomService roomService)
         {
-            _context = context;
+            _roomService = roomService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllRooms()
         {
-            var rooms = await _context.Rooms.ToListAsync();
+            var rooms = await _roomService.GetAllRoomsAsync();
             return Ok(rooms);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRoomById(int id)
         {
-            var room = await _context.Rooms.FindAsync(id);
+            var room = await _roomService.GetRoomByIdAsync(id);
             if (room == null)
             {
                 return NotFound();
@@ -35,55 +34,41 @@ namespace HotelGuru.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRoom([FromBody] Room room)
+        public async Task<IActionResult> CreateRoom([FromBody] RoomCreateDto roomDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Rooms.Add(room);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetRoomById), new { id = room.Id }, room);
+            var createdRoom = await _roomService.CreateRoomAsync(roomDto);
+            return CreatedAtAction(nameof(GetRoomById), new { id = createdRoom.Id }, createdRoom);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateRoom(int id, [FromBody] Room room)
+        public async Task<IActionResult> UpdateRoom(int id, [FromBody] RoomUpdateDto roomDto)
         {
-            if (id != room.Id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
-            _context.Entry(room).State = EntityState.Modified;
-
-            try
+            var updatedRoom = await _roomService.UpdateRoomAsync(id, roomDto);
+            if (updatedRoom == null)
             {
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Rooms.Any(r => r.Id == id))
-                {
-                    return NotFound();
-                }
-                throw;
-            }
-
-            return NoContent();
+            return Ok(updatedRoom);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
-            var room = await _context.Rooms.FindAsync(id);
-            if (room == null)
+            var result = await _roomService.DeleteRoomAsync(id);
+            if (!result)
             {
                 return NotFound();
             }
-
-            _context.Rooms.Remove(room);
-            await _context.SaveChangesAsync();
             return NoContent();
         }
     }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using HotelGuru.DataContext.Context;
-using HotelGuru.DataContext.Entities;
-using Microsoft.EntityFrameworkCore;
+using HotelGuru.Services;
+using HotelGuru.DataContext.Dtos;
 
 namespace HotelGuru.Controllers
 {
@@ -9,24 +8,24 @@ namespace HotelGuru.Controllers
     [Route("api/[controller]")]
     public class InvoicesController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IInvoiceService _invoiceService;
 
-        public InvoicesController(AppDbContext context)
+        public InvoicesController(IInvoiceService invoiceService)
         {
-            _context = context;
+            _invoiceService = invoiceService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllInvoices()
         {
-            var invoices = await _context.Invoices.ToListAsync();
+            var invoices = await _invoiceService.GetAllInvoicesAsync();
             return Ok(invoices);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetInvoiceById(int id)
         {
-            var invoice = await _context.Invoices.FindAsync(id);
+            var invoice = await _invoiceService.GetInvoiceByIdAsync(id);
             if (invoice == null)
             {
                 return NotFound();
@@ -34,56 +33,50 @@ namespace HotelGuru.Controllers
             return Ok(invoice);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateInvoice([FromBody] Invoice invoice)
+        [HttpGet("reservation/{reservationId}")]
+        public async Task<IActionResult> GetInvoiceByReservationId(int reservationId)
         {
-            if (!ModelState.IsValid)
+            var invoice = await _invoiceService.GetInvoiceByReservationIdAsync(reservationId);
+            if (invoice == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
-
-            _context.Invoices.Add(invoice);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetInvoiceById), new { id = invoice.Id }, invoice);
+            return Ok(invoice);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateInvoice(int id, [FromBody] Invoice invoice)
+        [HttpPost("reservation/{reservationId}")]
+        public async Task<IActionResult> CreateInvoice(int reservationId)
         {
-            if (id != invoice.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(invoice).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var createdInvoice = await _invoiceService.CreateInvoiceAsync(reservationId);
+                return CreatedAtAction(nameof(GetInvoiceById), new { id = createdInvoice.Id }, createdInvoice);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (InvalidOperationException ex)
             {
-                if (!_context.Invoices.Any(i => i.Id == id))
-                {
-                    return NotFound();
-                }
-                throw;
+                return BadRequest(new { message = ex.Message });
             }
+        }
 
+        [HttpPut("{id}/additional-charges")]
+        public async Task<IActionResult> UpdateInvoiceWithAdditionalCharges(int id, [FromQuery] decimal additionalCharges)
+        {
+            var result = await _invoiceService.UpdateInvoiceAsync(id, additionalCharges);
+            if (!result)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInvoice(int id)
         {
-            var invoice = await _context.Invoices.FindAsync(id);
-            if (invoice == null)
+            var result = await _invoiceService.DeleteInvoiceAsync(id);
+            if (!result)
             {
                 return NotFound();
             }
-
-            _context.Invoices.Remove(invoice);
-            await _context.SaveChangesAsync();
             return NoContent();
         }
     }

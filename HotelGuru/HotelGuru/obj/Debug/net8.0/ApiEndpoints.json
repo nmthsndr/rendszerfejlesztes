@@ -11,22 +11,6 @@
   },
   {
     "ContainingType": "HotelGuru.Controllers.AddressesController",
-    "Method": "CreateAddress",
-    "RelativePath": "api/Addresses",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "address",
-        "Type": "HotelGuru.DataContext.Entities.Address",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HotelGuru.Controllers.AddressesController",
     "Method": "GetAddressById",
     "RelativePath": "api/Addresses/{id}",
     "HttpMethod": "GET",
@@ -55,8 +39,8 @@
         "IsRequired": true
       },
       {
-        "Name": "address",
-        "Type": "HotelGuru.DataContext.Entities.Address",
+        "Name": "addressDto",
+        "Type": "HotelGuru.DataContext.Dtos.AddressDto",
         "IsRequired": true
       }
     ],
@@ -79,21 +63,37 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HotelGuru.Controllers.AdminController",
-    "Method": "UpdateRoomDetails",
-    "RelativePath": "api/Admin/UpdateRoomDetails",
-    "HttpMethod": "PUT",
+    "ContainingType": "HotelGuru.Controllers.AddressesController",
+    "Method": "GetAddressesByUserId",
+    "RelativePath": "api/Addresses/user/{userId}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "roomId",
+        "Name": "userId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.AddressesController",
+    "Method": "CreateAddress",
+    "RelativePath": "api/Addresses/user/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
       },
       {
-        "Name": "roomDto",
-        "Type": "HotelGuru.DataContext.Dtos.RoomDto",
+        "Name": "addressDto",
+        "Type": "HotelGuru.DataContext.Dtos.AddressDto",
         "IsRequired": true
       }
     ],
@@ -101,8 +101,39 @@
   },
   {
     "ContainingType": "HotelGuru.Controllers.AdminController",
-    "Method": "UpdateRoomStatus",
-    "RelativePath": "api/Admin/UpdateRoomStatus",
+    "Method": "GetAllRoomsWithStatus",
+    "RelativePath": "api/Admin/rooms",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.AdminController",
+    "Method": "UpdateRoomDetails",
+    "RelativePath": "api/Admin/rooms/{roomId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "roomDto",
+        "Type": "HotelGuru.DataContext.Dtos.RoomUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.AdminController",
+    "Method": "SetRoomMaintenance",
+    "RelativePath": "api/Admin/rooms/{roomId}/maintenance",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -110,7 +141,28 @@
       {
         "Name": "roomId",
         "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "isUnderMaintenance",
+        "Type": "System.Boolean",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.AdminController",
+    "Method": "UpdateRoomStatus",
+    "RelativePath": "api/Admin/rooms/{roomId}/status",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
       },
       {
         "Name": "isAvailable",
@@ -139,8 +191,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "extraService",
-        "Type": "HotelGuru.DataContext.Entities.ExtraService",
+        "Name": "extraServiceDto",
+        "Type": "HotelGuru.DataContext.Dtos.ExtraServiceDto",
         "IsRequired": true
       }
     ],
@@ -176,8 +228,8 @@
         "IsRequired": true
       },
       {
-        "Name": "extraService",
-        "Type": "HotelGuru.DataContext.Entities.ExtraService",
+        "Name": "extraServiceDto",
+        "Type": "HotelGuru.DataContext.Dtos.ExtraServiceDto",
         "IsRequired": true
       }
     ],
@@ -218,8 +270,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "hotel",
-        "Type": "HotelGuru.DataContext.Entities.Hotel",
+        "Name": "hotelDto",
+        "Type": "HotelGuru.DataContext.Dtos.HotelDto",
         "IsRequired": true
       }
     ],
@@ -255,8 +307,8 @@
         "IsRequired": true
       },
       {
-        "Name": "hotel",
-        "Type": "HotelGuru.DataContext.Entities.Hotel",
+        "Name": "hotelDto",
+        "Type": "HotelGuru.DataContext.Dtos.HotelDto",
         "IsRequired": true
       }
     ],
@@ -290,22 +342,6 @@
   },
   {
     "ContainingType": "HotelGuru.Controllers.InvoicesController",
-    "Method": "CreateInvoice",
-    "RelativePath": "api/Invoices",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "invoice",
-        "Type": "HotelGuru.DataContext.Entities.Invoice",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HotelGuru.Controllers.InvoicesController",
     "Method": "GetInvoiceById",
     "RelativePath": "api/Invoices/{id}",
     "HttpMethod": "GET",
@@ -315,27 +351,6 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HotelGuru.Controllers.InvoicesController",
-    "Method": "UpdateInvoice",
-    "RelativePath": "api/Invoices/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "invoice",
-        "Type": "HotelGuru.DataContext.Entities.Invoice",
         "IsRequired": true
       }
     ],
@@ -358,9 +373,46 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HotelGuru.Controllers.ReceptionistController",
-    "Method": "CheckInGuest",
-    "RelativePath": "api/Receptionist/CheckInGuest",
+    "ContainingType": "HotelGuru.Controllers.InvoicesController",
+    "Method": "UpdateInvoiceWithAdditionalCharges",
+    "RelativePath": "api/Invoices/{id}/additional-charges",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "additionalCharges",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.InvoicesController",
+    "Method": "GetInvoiceByReservationId",
+    "RelativePath": "api/Invoices/reservation/{reservationId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reservationId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.InvoicesController",
+    "Method": "CreateInvoice",
+    "RelativePath": "api/Invoices/reservation/{reservationId}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -368,7 +420,23 @@
       {
         "Name": "reservationId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.ReceptionistController",
+    "Method": "CheckInGuest",
+    "RelativePath": "api/Receptionist/check-in/{reservationId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reservationId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -376,7 +444,7 @@
   {
     "ContainingType": "HotelGuru.Controllers.ReceptionistController",
     "Method": "ConfirmReservation",
-    "RelativePath": "api/Receptionist/ConfirmReservation",
+    "RelativePath": "api/Receptionist/confirm-reservation/{reservationId}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -384,7 +452,7 @@
       {
         "Name": "reservationId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -392,7 +460,7 @@
   {
     "ContainingType": "HotelGuru.Controllers.ReceptionistController",
     "Method": "GenerateInvoice",
-    "RelativePath": "api/Receptionist/GenerateInvoice",
+    "RelativePath": "api/Receptionist/generate-invoice/{reservationId}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -400,9 +468,19 @@
       {
         "Name": "reservationId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.ReceptionistController",
+    "Method": "GetPendingReservations",
+    "RelativePath": "api/Receptionist/pending-reservations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -424,8 +502,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "reservation",
-        "Type": "HotelGuru.DataContext.Entities.Reservation",
+        "Name": "reservationDto",
+        "Type": "HotelGuru.DataContext.Dtos.ReservationCreateDto",
         "IsRequired": true
       }
     ],
@@ -449,28 +527,7 @@
   },
   {
     "ContainingType": "HotelGuru.Controllers.ReservationsController",
-    "Method": "UpdateReservation",
-    "RelativePath": "api/Reservations/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "reservation",
-        "Type": "HotelGuru.DataContext.Entities.Reservation",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HotelGuru.Controllers.ReservationsController",
-    "Method": "DeleteReservation",
+    "Method": "CancelReservation",
     "RelativePath": "api/Reservations/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -478,6 +535,22 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.ReservationsController",
+    "Method": "GetUserReservations",
+    "RelativePath": "api/Reservations/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -503,8 +576,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "role",
-        "Type": "HotelGuru.DataContext.Entities.Role",
+        "Name": "roleDto",
+        "Type": "HotelGuru.DataContext.Dtos.RoleDto",
         "IsRequired": true
       }
     ],
@@ -540,8 +613,8 @@
         "IsRequired": true
       },
       {
-        "Name": "role",
-        "Type": "HotelGuru.DataContext.Entities.Role",
+        "Name": "roleDto",
+        "Type": "HotelGuru.DataContext.Dtos.RoleDto",
         "IsRequired": true
       }
     ],
@@ -558,6 +631,38 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.RolesController",
+    "Method": "GetUsersByRole",
+    "RelativePath": "api/Roles/{id}/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.RolesController",
+    "Method": "GetRoleByName",
+    "RelativePath": "api/Roles/name/{name}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -582,8 +687,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "room",
-        "Type": "HotelGuru.DataContext.Entities.Room",
+        "Name": "roomDto",
+        "Type": "HotelGuru.DataContext.Dtos.RoomCreateDto",
         "IsRequired": true
       }
     ],
@@ -619,8 +724,8 @@
         "IsRequired": true
       },
       {
-        "Name": "room",
-        "Type": "HotelGuru.DataContext.Entities.Room",
+        "Name": "roomDto",
+        "Type": "HotelGuru.DataContext.Dtos.RoomUpdateDto",
         "IsRequired": true
       }
     ],
@@ -654,22 +759,6 @@
   },
   {
     "ContainingType": "HotelGuru.Controllers.UsersController",
-    "Method": "CreateUser",
-    "RelativePath": "api/Users",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "user",
-        "Type": "HotelGuru.DataContext.Entities.User",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HotelGuru.Controllers.UsersController",
     "Method": "GetUserById",
     "RelativePath": "api/Users/{id}",
     "HttpMethod": "GET",
@@ -698,8 +787,8 @@
         "IsRequired": true
       },
       {
-        "Name": "user",
-        "Type": "HotelGuru.DataContext.Entities.User",
+        "Name": "userDto",
+        "Type": "HotelGuru.DataContext.Dtos.UserUpdateDto",
         "IsRequired": true
       }
     ],
@@ -716,6 +805,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.UsersController",
+    "Method": "RegisterUser",
+    "RelativePath": "api/Users/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDto",
+        "Type": "HotelGuru.DataContext.Dtos.UserRegisterDto",
         "IsRequired": true
       }
     ],

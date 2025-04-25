@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HotelGuru.Services;
-using HotelGuru.DataContext.Entities;
+using HotelGuru.DataContext.Dtos;
 
 namespace HotelGuru.Controllers
 {
@@ -33,37 +33,89 @@ namespace HotelGuru.Controllers
             return Ok(role);
         }
 
+        [HttpGet("name/{name}")]
+        public async Task<IActionResult> GetRoleByName(string name)
+        {
+            var role = await _roleService.GetRoleByNameAsync(name);
+            if (role == null)
+            {
+                return NotFound();
+            }
+            return Ok(role);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> CreateRole([FromBody] Role role)
+        public async Task<IActionResult> CreateRole([FromBody] RoleDto roleDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var createdRole = await _roleService.CreateRoleAsync(role);
-            return CreatedAtAction(nameof(GetRoleById), new { id = createdRole.Id }, createdRole);
+            try
+            {
+                var createdRole = await _roleService.CreateRoleAsync(roleDto);
+                return CreatedAtAction(nameof(GetRoleById), new { id = createdRole.Id }, createdRole);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateRole(int id, [FromBody] Role role)
+        public async Task<IActionResult> UpdateRole(int id, [FromBody] RoleDto roleDto)
         {
-            if (!await _roleService.UpdateRoleAsync(id, role))
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return BadRequest(ModelState);
             }
-            return NoContent();
+
+            try
+            {
+                var updatedRole = await _roleService.UpdateRoleAsync(id, roleDto);
+                if (updatedRole == null)
+                {
+                    return NotFound();
+                }
+                return Ok(updatedRole);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRole(int id)
         {
-            if (!await _roleService.DeleteRoleAsync(id))
+            try
             {
-                return NotFound();
+                var result = await _roleService.DeleteRoleAsync(id);
+                if (!result)
+                {
+                    return NotFound();
+                }
+                return NoContent();
             }
-            return NoContent();
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}/users")]
+        public async Task<IActionResult> GetUsersByRole(int id)
+        {
+            try
+            {
+                var users = await _roleService.GetUsersByRoleAsync(id);
+                return Ok(users);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
         }
     }
 }
-

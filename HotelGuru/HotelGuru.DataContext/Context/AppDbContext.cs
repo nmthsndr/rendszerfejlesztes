@@ -17,17 +17,17 @@ namespace HotelGuru.DataContext.Context
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
-
         public DbSet<ExtraService> ExtraServices { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Room>()
                 .Property(r => r.Price)
-                .HasColumnType("decimal(18,2)"); // Specify precision and scale
+                .HasColumnType("decimal(18,2)");
         }
 
     }

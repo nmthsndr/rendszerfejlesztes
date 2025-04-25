@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HotelGuru.Services;
-using HotelGuru.DataContext.Entities;
+using HotelGuru.DataContext.Dtos;
 
 namespace HotelGuru.Controllers
 {
@@ -34,31 +34,38 @@ namespace HotelGuru.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateHotel([FromBody] Hotel hotel)
+        public async Task<IActionResult> CreateHotel([FromBody] HotelDto hotelDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var createdHotel = await _hotelService.CreateHotelAsync(hotel);
+            var createdHotel = await _hotelService.CreateHotelAsync(hotelDto);
             return CreatedAtAction(nameof(GetHotelById), new { id = createdHotel.Id }, createdHotel);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateHotel(int id, [FromBody] Hotel hotel)
+        public async Task<IActionResult> UpdateHotel(int id, [FromBody] HotelDto hotelDto)
         {
-            if (!await _hotelService.UpdateHotelAsync(id, hotel))
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var updatedHotel = await _hotelService.UpdateHotelAsync(id, hotelDto);
+            if (updatedHotel == null)
             {
                 return NotFound();
             }
-            return NoContent();
+            return Ok(updatedHotel);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteHotel(int id)
         {
-            if (!await _hotelService.DeleteHotelAsync(id))
+            var result = await _hotelService.DeleteHotelAsync(id);
+            if (!result)
             {
                 return NotFound();
             }
@@ -66,4 +73,3 @@ namespace HotelGuru.Controllers
         }
     }
 }
-

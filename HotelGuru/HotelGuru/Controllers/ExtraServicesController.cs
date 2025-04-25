@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using HotelGuru.DataContext.Context;
-using HotelGuru.DataContext.Entities;
-using Microsoft.EntityFrameworkCore;
+using HotelGuru.Services;
+using HotelGuru.DataContext.Dtos;
 
 namespace HotelGuru.Controllers
 {
@@ -9,24 +8,24 @@ namespace HotelGuru.Controllers
     [Route("api/[controller]")]
     public class ExtraServicesController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IExtraServiceService _extraServiceService;
 
-        public ExtraServicesController(AppDbContext context)
+        public ExtraServicesController(IExtraServiceService extraServiceService)
         {
-            _context = context;
+            _extraServiceService = extraServiceService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllExtraServices()
         {
-            var extraServices = await _context.ExtraServices.ToListAsync();
+            var extraServices = await _extraServiceService.GetAllExtraServicesAsync();
             return Ok(extraServices);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetExtraServiceById(int id)
         {
-            var extraService = await _context.ExtraServices.FindAsync(id);
+            var extraService = await _extraServiceService.GetExtraServiceByIdAsync(id);
             if (extraService == null)
             {
                 return NotFound();
@@ -35,55 +34,41 @@ namespace HotelGuru.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateExtraService([FromBody] ExtraService extraService)
+        public async Task<IActionResult> CreateExtraService([FromBody] ExtraServiceDto extraServiceDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.ExtraServices.Add(extraService);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetExtraServiceById), new { id = extraService.Id }, extraService);
+            var createdExtraService = await _extraServiceService.CreateExtraServiceAsync(extraServiceDto);
+            return CreatedAtAction(nameof(GetExtraServiceById), new { id = createdExtraService.Id }, createdExtraService);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateExtraService(int id, [FromBody] ExtraService extraService)
+        public async Task<IActionResult> UpdateExtraService(int id, [FromBody] ExtraServiceDto extraServiceDto)
         {
-            if (id != extraService.Id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
-            _context.Entry(extraService).State = EntityState.Modified;
-
-            try
+            var updatedExtraService = await _extraServiceService.UpdateExtraServiceAsync(id, extraServiceDto);
+            if (updatedExtraService == null)
             {
-                await _context.SaveChangesAsync();
+                return NotFound();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.ExtraServices.Any(e => e.Id == id))
-                {
-                    return NotFound();
-                }
-                throw;
-            }
-
-            return NoContent();
+            return Ok(updatedExtraService);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExtraService(int id)
         {
-            var extraService = await _context.ExtraServices.FindAsync(id);
-            if (extraService == null)
+            var result = await _extraServiceService.DeleteExtraServiceAsync(id);
+            if (!result)
             {
                 return NotFound();
             }
-
-            _context.ExtraServices.Remove(extraService);
-            await _context.SaveChangesAsync();
             return NoContent();
         }
     }
