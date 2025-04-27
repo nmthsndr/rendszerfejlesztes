@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HotelGuru.Services;
 using HotelGuru.DataContext.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HotelGuru.Controllers
 {
@@ -78,5 +79,18 @@ namespace HotelGuru.Controllers
             }
             return NoContent();
         }
+
+        [Authorize(Roles = "Adminisztrátor")]
+        public IActionResult AdminOnlyEndpoint()
+        {
+            return Ok("Ez csak adminisztrátorok számára elérhető.");
+        }
+
+        [Authorize(Roles = "Recepciós")]
+        public IActionResult ReceptionistOnlyEndpoint()
+        {
+            return Ok("Ez csak recepciósok számára elérhető.");
+        }
+
     }
 }

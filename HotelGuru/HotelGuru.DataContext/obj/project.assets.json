@@ -4694,28 +4694,31 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "Microsoft.EntityFrameworkCore >= 9.0.3",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.3",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sándor\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Oti\\.nuget\\packages\\": {},
+    "D:\\Iskola\\ViSu_2017\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj",
+      "projectUniqueName": "C:\\Users\\Oti\\Desktop\\Rendszerfejlesztés\\Beadando\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj",
       "projectName": "HotelGuru.DataContext",
-      "projectPath": "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj",
-      "packagesPath": "C:\\Users\\Sándor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sándor\\source\\repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\obj\\",
+      "projectPath": "C:\\Users\\Oti\\Desktop\\Rendszerfejlesztés\\Beadando\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj",
+      "packagesPath": "C:\\Users\\Oti\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Oti\\Desktop\\Rendszerfejlesztés\\Beadando\\HotelGuru\\HotelGuru.DataContext\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "D:\\Iskola\\ViSu_2017\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Sándor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Oti\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4748,6 +4751,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[9.0.3, )"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
@@ -4775,7 +4782,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
