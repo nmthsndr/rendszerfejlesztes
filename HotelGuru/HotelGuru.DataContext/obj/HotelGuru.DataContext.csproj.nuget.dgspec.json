@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sándor\\Source\\Repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {}
+    "D:\\Egyetem\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sándor\\Source\\Repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {
+    "D:\\Egyetem\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sándor\\Source\\Repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj",
+        "projectUniqueName": "D:\\Egyetem\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj",
         "projectName": "HotelGuru.DataContext",
-        "projectPath": "C:\\Users\\Sándor\\Source\\Repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj",
-        "packagesPath": "C:\\Users\\Sándor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sándor\\Source\\Repos\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\obj\\",
+        "projectPath": "D:\\Egyetem\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj",
+        "packagesPath": "C:\\Users\\kovac\\.nuget\\packages\\",
+        "outputPath": "D:\\Egyetem\\rendszerfejlesztes\\HotelGuru\\HotelGuru.DataContext\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Sándor\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kovac\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
