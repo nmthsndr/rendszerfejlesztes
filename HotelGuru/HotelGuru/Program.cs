@@ -37,6 +37,26 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]))
     };
+    options.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
+        {
+            Console.WriteLine("Hitelesítési hiba: " + context.Exception.Message);
+            return Task.CompletedTask;
+        },
+        OnTokenValidated = context =>
+        {
+            Console.WriteLine("Token validálva: " + context.SecurityToken);
+            var claims = context.Principal.Claims.Select(c => c.Type + ": " + c.Value);
+            Console.WriteLine("Claims: " + string.Join(", ", claims));
+            return Task.CompletedTask;
+        },
+        OnChallenge = context =>
+        {
+            Console.WriteLine("Challenge: " + context.Error);
+            return Task.CompletedTask;
+        }
+    };
 });
 
 // Add authorization
