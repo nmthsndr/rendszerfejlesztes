@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using HotelGuru.Services;
 using HotelGuru.DataContext.Dtos;
 
@@ -15,6 +16,7 @@ namespace HotelGuru.Controllers
             _roomService = roomService;
         }
 
+        // Public endpoints - no authorization required
         [HttpGet]
         public async Task<IActionResult> GetAllRooms()
         {
@@ -33,7 +35,9 @@ namespace HotelGuru.Controllers
             return Ok(room);
         }
 
+        // Staff-only endpoints
         [HttpPost]
+        [Authorize(Policy = "StaffOnly")]
         public async Task<IActionResult> CreateRoom([FromBody] RoomCreateDto roomDto)
         {
             if (!ModelState.IsValid)
@@ -46,6 +50,7 @@ namespace HotelGuru.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policy = "StaffOnly")]
         public async Task<IActionResult> UpdateRoom(int id, [FromBody] RoomUpdateDto roomDto)
         {
             if (!ModelState.IsValid)
@@ -62,6 +67,7 @@ namespace HotelGuru.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "AdminOnly")]  // Only Admin can delete rooms
         public async Task<IActionResult> DeleteRoom(int id)
         {
             var result = await _roomService.DeleteRoomAsync(id);

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using HotelGuru.Services;
 using HotelGuru.DataContext.Dtos;
 
@@ -6,6 +7,7 @@ namespace HotelGuru.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Policy = "AdminOnly")]  // Only users with Admin role can access
     public class AdminController : ControllerBase
     {
         private readonly IAdminService _adminService;

@@ -14,6 +14,8 @@ namespace HotelGuru.DataContext.Entities
         public string Name { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
         public List<Address> Address { get; set; }
         public List<Role> Roles { get; set; }
     }

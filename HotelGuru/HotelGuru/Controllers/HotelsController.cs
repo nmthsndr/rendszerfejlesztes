@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using HotelGuru.Services;
 using HotelGuru.DataContext.Dtos;
 
@@ -34,6 +35,7 @@ namespace HotelGuru.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> CreateHotel([FromBody] HotelDto hotelDto)
         {
             if (!ModelState.IsValid)
@@ -46,6 +48,7 @@ namespace HotelGuru.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> UpdateHotel(int id, [FromBody] HotelDto hotelDto)
         {
             if (!ModelState.IsValid)
@@ -62,6 +65,7 @@ namespace HotelGuru.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> DeleteHotel(int id)
         {
             var result = await _hotelService.DeleteHotelAsync(id);
