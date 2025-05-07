@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using HotelGuru.Services;
 using HotelGuru.DataContext.Dtos;
+using System.Security.Claims;
 
 namespace HotelGuru.Controllers
 {
@@ -43,8 +44,12 @@ namespace HotelGuru.Controllers
 
             try
             {
-                // In a real application, you'd get the user ID from the authentication context
-                int userId = 1; // Placeholder - should come from authenticated user
+                // Get the user ID from the JWT token
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
+                {
+                    return Unauthorized(new { message = "User not authenticated or invalid user ID" });
+                }
 
                 var createdReservation = await _reservationService.CreateReservationAsync(reservationDto, userId);
                 return CreatedAtAction(nameof(GetReservationById), new { id = createdReservation.Id }, createdReservation);
