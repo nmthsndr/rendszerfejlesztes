@@ -1095,6 +1095,16 @@
         "tags": [
           "Rooms"
         ],
+        "parameters": [
+          {
+            "name": "hotelId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1114,6 +1124,36 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rooms/available": {
+      "get": {
+        "tags": [
+          "Rooms"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1405,6 +1445,7 @@
         "required": [
           "endDate",
           "paymentMethod",
+          "roomIds",
           "startDate"
         ],
         "type": "object",
@@ -1426,8 +1467,7 @@
             "items": {
               "type": "integer",
               "format": "int32"
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": false

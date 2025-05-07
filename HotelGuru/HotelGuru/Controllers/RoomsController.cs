@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using HotelGuru.Services;
 using HotelGuru.DataContext.Dtos;
+using System;
 
 namespace HotelGuru.Controllers
 {
@@ -24,6 +25,20 @@ namespace HotelGuru.Controllers
             return Ok(rooms);
         }
 
+        [HttpGet("available")]
+        public async Task<IActionResult> GetAvailableRooms([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        {
+            try
+            {
+                var rooms = await _roomService.GetAvailableRoomsAsync(startDate, endDate);
+                return Ok(rooms);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRoomById(int id)
         {
@@ -38,15 +53,22 @@ namespace HotelGuru.Controllers
         // Staff-only endpoints
         [HttpPost]
         [Authorize(Policy = "StaffOnly")]
-        public async Task<IActionResult> CreateRoom([FromBody] RoomCreateDto roomDto)
+        public async Task<IActionResult> CreateRoom([FromBody] RoomCreateDto roomDto, [FromQuery] int hotelId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var createdRoom = await _roomService.CreateRoomAsync(roomDto);
-            return CreatedAtAction(nameof(GetRoomById), new { id = createdRoom.Id }, createdRoom);
+            try
+            {
+                var createdRoom = await _roomService.CreateRoomAsync(roomDto, hotelId);
+                return CreatedAtAction(nameof(GetRoomById), new { id = createdRoom.Id }, createdRoom);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpPut("{id}")]
@@ -58,24 +80,38 @@ namespace HotelGuru.Controllers
                 return BadRequest(ModelState);
             }
 
-            var updatedRoom = await _roomService.UpdateRoomAsync(id, roomDto);
-            if (updatedRoom == null)
+            try
             {
-                return NotFound();
+                var updatedRoom = await _roomService.UpdateRoomAsync(id, roomDto);
+                if (updatedRoom == null)
+                {
+                    return NotFound();
+                }
+                return Ok(updatedRoom);
             }
-            return Ok(updatedRoom);
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpDelete("{id}")]
         [Authorize(Policy = "AdminOnly")]  // Only Admin can delete rooms
         public async Task<IActionResult> DeleteRoom(int id)
         {
-            var result = await _roomService.DeleteRoomAsync(id);
-            if (!result)
+            try
             {
-                return NotFound();
+                var result = await _roomService.DeleteRoomAsync(id);
+                if (!result)
+                {
+                    return NotFound();
+                }
+                return NoContent();
             }
-            return NoContent();
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

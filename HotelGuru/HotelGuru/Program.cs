@@ -2,96 +2,39 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 using HotelGuru.DataContext.Context;
 using HotelGuru.Services;
-using System.Text;
+using System.Text.Json.Serialization;
+using HotelGuru;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
-
-// Use only AppDbContext, remove HotelGuruContext if it exists
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ??
-        "Server=(LocalDB)\\MSSQLLocalDB;Database=HotelGuruDB;Trusted_Connection=True;TrustServerCertificate=True;");
-});
-
-// Configure JWT Authentication
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
-        ValidAudience = builder.Configuration["JwtSettings:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]))
-    };
-    options.Events = new JwtBearerEvents
-    {
-        OnAuthenticationFailed = context =>
-        {
-            Console.WriteLine("Hitelesítési hiba: " + context.Exception.Message);
-            return Task.CompletedTask;
-        },
-        OnTokenValidated = context =>
-        {
-            Console.WriteLine("Token validálva: " + context.SecurityToken);
-            var claims = context.Principal.Claims.Select(c => c.Type + ": " + c.Value);
-            Console.WriteLine("Claims: " + string.Join(", ", claims));
-            return Task.CompletedTask;
-        },
-        OnChallenge = context =>
-        {
-            Console.WriteLine("Challenge: " + context.Error);
-            return Task.CompletedTask;
-        }
-    };
-});
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });
 
-// Add authorization
-builder.Services.AddAuthorization(options =>
+// Configure CORS
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
-    options.AddPolicy("ReceptionistOnly", policy => policy.RequireRole("Receptionist"));
-    options.AddPolicy("StaffOnly", policy =>
-        policy.RequireRole("Admin", "Receptionist", "Manager"));
+    options.AddPolicy("AllowAll",
+        builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
 
-// Register services with their interfaces
-builder.Services.AddScoped<IAdminService, AdminService>();
-builder.Services.AddScoped<IReceptionistService, ReceptionistService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IRoomService, RoomService>();
-builder.Services.AddScoped<IHotelService, HotelService>();
-builder.Services.AddScoped<IRoleService, RoleService>();
-builder.Services.AddScoped<IAddressService, AddressService>();
-builder.Services.AddScoped<IExtraServiceService, ExtraServiceService>();
-builder.Services.AddScoped<IReservationService, ReservationService>();
-builder.Services.AddScoped<IInvoiceService, InvoiceService>();
-builder.Services.AddScoped<IJwtService, JwtService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-
-// AutoMapper Config
-builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
-
-// Swagger configuration with JWT support
+// Configure Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelGuru API", Version = "v1" });
 
-    // Configure Swagger to use JWT
+    // Configure Swagger to use JWT Authentication
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
@@ -112,38 +55,93 @@ builder.Services.AddSwaggerGen(c =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            Array.Empty<string>()
         }
     });
 });
 
-builder.Services.AddCors(options =>
+// Add database context
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Configure JWT Authentication
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var key = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]);
+
+builder.Services.AddAuthentication(options =>
 {
-    options.AddPolicy("AllowFrontend",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:5173")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = true,
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidateAudience = true,
+        ValidAudience = jwtSettings["Audience"],
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+    };
 });
 
-var app = builder.Build();
+// Configure Authorization Policies
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("StaffOnly", policy => policy.RequireRole("Admin", "Manager", "Receptionist"));
+    options.AddPolicy("ReceptionistOnly", policy => policy.RequireRole("Admin", "Receptionist"));
+});
 
-app.UseCors("AllowFrontend");
+// Register AutoMapper
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
+// Register Services
+builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IExtraServiceService, ExtraServiceService>();
+builder.Services.AddScoped<IHotelService, HotelService>();
+builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IReceptionistService, ReceptionistService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HotelGuru API v1"));
+    app.UseSwaggerUI();
+
+    // Initialize the database with test data in development
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        // Apply migrations
+        context.Database.Migrate();
+
+        // Seed initial data in development
+        DbInitializer.Initialize(context);
+    }
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAll");
 
-// Add authentication middleware
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
 app.Run();

@@ -50,7 +50,6 @@ namespace HotelGuru.Services
 
         public async Task<UserDto> RegisterUserAsync(UserRegisterDto userDto)
         {
-            // Check if user already exists
             if (await _context.Users.AnyAsync(u => u.Email == userDto.Email))
             {
                 throw new InvalidOperationException("User with this email already exists.");
@@ -58,7 +57,6 @@ namespace HotelGuru.Services
 
             var user = _mapper.Map<User>(userDto);
 
-            // Handle roles
             if (userDto.RoleIds != null && userDto.RoleIds.Any())
             {
                 var roles = await _context.Roles
@@ -70,7 +68,6 @@ namespace HotelGuru.Services
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            // Reload with includes
             user = await _context.Users
                 .Include(u => u.Address)
                 .Include(u => u.Roles)
@@ -90,7 +87,6 @@ namespace HotelGuru.Services
 
             _mapper.Map(userDto, user);
 
-            // Update roles if provided
             if (userDto.RoleIds != null)
             {
                 user.Roles.Clear();
@@ -102,7 +98,6 @@ namespace HotelGuru.Services
 
             await _context.SaveChangesAsync();
 
-            // Reload with includes
             user = await _context.Users
                 .Include(u => u.Address)
                 .Include(u => u.Roles)

@@ -722,6 +722,11 @@
         "Name": "roomDto",
         "Type": "HotelGuru.DataContext.Dtos.RoomCreateDto",
         "IsRequired": true
+      },
+      {
+        "Name": "hotelId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -775,6 +780,27 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HotelGuru.Controllers.RoomsController",
+    "Method": "GetAvailableRooms",
+    "RelativePath": "api/Rooms/available",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "startDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

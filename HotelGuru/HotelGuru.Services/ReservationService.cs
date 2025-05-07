@@ -31,6 +31,7 @@ namespace HotelGuru.Services
             var reservations = await _context.Reservations
                 .Include(r => r.User)
                 .Include(r => r.Rooms)
+                    .ThenInclude(r => r.Hotel)
                 .Include(r => r.Invoice)
                 .ToListAsync();
             return _mapper.Map<IEnumerable<ReservationDto>>(reservations);
@@ -41,6 +42,7 @@ namespace HotelGuru.Services
             var reservation = await _context.Reservations
                 .Include(r => r.User)
                 .Include(r => r.Rooms)
+                    .ThenInclude(r => r.Hotel)
                 .Include(r => r.Invoice)
                 .FirstOrDefaultAsync(r => r.Id == id);
 
@@ -52,34 +54,87 @@ namespace HotelGuru.Services
 
         public async Task<ReservationDto> CreateReservationAsync(ReservationCreateDto reservationDto, int userId)
         {
-            var reservation = _mapper.Map<Reservation>(reservationDto);
-            reservation.UserId = userId;
-
-            // Validate dates
-            if (reservation.StartDate >= reservation.EndDate)
+            // Basic validation
+            if (reservationDto.StartDate >= reservationDto.EndDate)
             {
                 throw new InvalidOperationException("End date must be after start date.");
             }
 
-            // Check if all rooms are available for the dates
-            // This is a simple implementation - in reality, you'd need more complex logic
+            if (reservationDto.RoomIds == null || !reservationDto.RoomIds.Any())
+            {
+                throw new InvalidOperationException("At least one room must be selected.");
+            }
 
-            _context.Reservations.Add(reservation);
-            await _context.SaveChangesAsync();
+            // Start transaction to ensure data consistency
+            using var transaction = await _context.Database.BeginTransactionAsync();
 
-            // Reload with includes
-            reservation = await _context.Reservations
-                .Include(r => r.User)
-                .Include(r => r.Rooms)
-                .Include(r => r.Invoice)
-                .FirstOrDefaultAsync(r => r.Id == reservation.Id); 
+            try
+            {
+                // Map the DTO to entity
+                var reservation = _mapper.Map<Reservation>(reservationDto);
+                reservation.UserId = userId;
 
-            return _mapper.Map<ReservationDto>(reservation!);
+                // Get the selected rooms
+                var roomIds = reservationDto.RoomIds;
+                var rooms = await _context.Rooms
+                    .Where(r => roomIds.Contains(r.Id))
+                    .ToListAsync();
+
+                if (rooms.Count != roomIds.Count)
+                {
+                    throw new InvalidOperationException("One or more selected rooms were not found.");
+                }
+
+                // Check room availability for the selected dates
+                foreach (var room in rooms)
+                {
+                    var isRoomAvailable = await IsRoomAvailable(room.Id, reservationDto.StartDate, reservationDto.EndDate);
+                    if (!isRoomAvailable)
+                    {
+                        throw new InvalidOperationException($"Room {room.Type} is not available for the selected dates.");
+                    }
+                }
+
+                // Save the reservation
+                _context.Reservations.Add(reservation);
+                await _context.SaveChangesAsync();
+
+                // Associate rooms with the reservation
+                foreach (var room in rooms)
+                {
+                    room.ReservationId = reservation.Id;
+                    room.Available = false; // Mark the room as unavailable
+                }
+
+                await _context.SaveChangesAsync();
+
+                // Commit the transaction
+                await transaction.CommitAsync();
+
+                // Return the created reservation
+                var createdReservation = await _context.Reservations
+                    .Include(r => r.User)
+                    .Include(r => r.Rooms)
+                        .ThenInclude(r => r.Hotel)
+                    .Include(r => r.Invoice)
+                    .FirstOrDefaultAsync(r => r.Id == reservation.Id);
+
+                return _mapper.Map<ReservationDto>(createdReservation!);
+            }
+            catch (Exception)
+            {
+                // Rollback transaction on error
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
         public async Task<bool> CancelReservationAsync(int id)
         {
-            var reservation = await _context.Reservations.FindAsync(id);
+            var reservation = await _context.Reservations
+                .Include(r => r.Rooms)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
             if (reservation == null)
                 return false;
 
@@ -89,9 +144,33 @@ namespace HotelGuru.Services
                 throw new InvalidOperationException("Cannot cancel reservation less than 24 hours before start date.");
             }
 
-            _context.Reservations.Remove(reservation);
-            await _context.SaveChangesAsync();
-            return true;
+            // Start transaction
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                // Mark associated rooms as available again
+                foreach (var room in reservation.Rooms)
+                {
+                    room.ReservationId = null;
+                    room.Available = true;
+                }
+
+                // Remove the reservation
+                _context.Reservations.Remove(reservation);
+                await _context.SaveChangesAsync();
+
+                // Commit the transaction
+                await transaction.CommitAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                // Rollback transaction on error
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
         public async Task<IEnumerable<ReservationDto>> GetUserReservationsAsync(int userId)
@@ -100,10 +179,36 @@ namespace HotelGuru.Services
                 .Where(r => r.UserId == userId)
                 .Include(r => r.User)
                 .Include(r => r.Rooms)
+                    .ThenInclude(r => r.Hotel)
                 .Include(r => r.Invoice)
                 .ToListAsync();
 
             return _mapper.Map<IEnumerable<ReservationDto>>(reservations);
+        }
+
+        // Helper method to check room availability
+        private async Task<bool> IsRoomAvailable(int roomId, DateTime startDate, DateTime endDate)
+        {
+            // Check if the room exists and is available
+            var room = await _context.Rooms
+                .Include(r => r.Reservation)
+                .FirstOrDefaultAsync(r => r.Id == roomId);
+
+            if (room == null || !room.Available)
+                return false;
+
+            // If the room has no reservation, it's available
+            if (room.Reservation == null)
+                return true;
+
+            // Check if there's any overlap with existing reservations
+            var existingReservation = room.Reservation;
+
+            // Check for date overlap
+            if (startDate < existingReservation.EndDate && endDate > existingReservation.StartDate)
+                return false;
+
+            return true;
         }
     }
 }
