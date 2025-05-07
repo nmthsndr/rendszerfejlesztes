@@ -66,8 +66,7 @@ namespace HotelGuru.Services
         public async Task<IEnumerable<RoomDto>> GetAllRoomsWithStatusAsync()
         {
             try
-            {
-                // Make sure to use proper Include statements
+            {                
                 var rooms = await _context.Rooms
                     .Include(r => r.Hotel)
                     .Include(r => r.Reservation)
@@ -77,9 +76,8 @@ namespace HotelGuru.Services
             }
             catch (Exception ex)
             {
-                // Log the exception details
                 Console.WriteLine($"Error in GetAllRoomsWithStatusAsync: {ex.Message}");
-                throw; // Rethrow to let higher levels handle it
+                throw;
             }
         }
 

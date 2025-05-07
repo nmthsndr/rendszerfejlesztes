@@ -10037,25 +10037,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Felhasználó\\.nuget\\packages\\": {},
-    "X:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Users\\Oti\\.nuget\\packages\\": {},
+    "D:\\Iskola\\ViSu_2017\\NuGetPackages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru\\HotelGuru.csproj",
+      "projectUniqueName": "C:\\Users\\Oti\\Desktop\\Rendszerfejlesztés\\Beadando\\HotelGuru\\HotelGuru\\HotelGuru.csproj",
       "projectName": "HotelGuru",
-      "projectPath": "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru\\HotelGuru.csproj",
-      "packagesPath": "C:\\Users\\Felhasználó\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru\\obj\\",
+      "projectPath": "C:\\Users\\Oti\\Desktop\\Rendszerfejlesztés\\Beadando\\HotelGuru\\HotelGuru\\HotelGuru.csproj",
+      "packagesPath": "C:\\Users\\Oti\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Oti\\Desktop\\Rendszerfejlesztés\\Beadando\\HotelGuru\\HotelGuru\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "X:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "D:\\Iskola\\ViSu_2017\\NuGetPackages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Felhasználó\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Oti\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -10064,18 +10064,17 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {
-              "projectPath": "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj"
+            "C:\\Users\\Oti\\Desktop\\Rendszerfejlesztés\\Beadando\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj": {
+              "projectPath": "C:\\Users\\Oti\\Desktop\\Rendszerfejlesztés\\Beadando\\HotelGuru\\HotelGuru.DataContext\\HotelGuru.DataContext.csproj"
             },
-            "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru.Services\\HotelGuru.Services.csproj": {
-              "projectPath": "C:\\Users\\Felhasználó\\Desktop\\Hotelguru\\HotelGuru\\HotelGuru.Services\\HotelGuru.Services.csproj"
+            "C:\\Users\\Oti\\Desktop\\Rendszerfejlesztés\\Beadando\\HotelGuru\\HotelGuru.Services\\HotelGuru.Services.csproj": {
+              "projectPath": "C:\\Users\\Oti\\Desktop\\Rendszerfejlesztés\\Beadando\\HotelGuru\\HotelGuru.Services\\HotelGuru.Services.csproj"
             }
           }
         }

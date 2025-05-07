@@ -27,8 +27,6 @@ namespace HotelGuru.Services
 
         public async Task<IEnumerable<ReservationDto>> GetPendingReservationsAsync()
         {
-            // Get reservations that haven't been confirmed yet
-            // This assumes we add a Status field to Reservation entity
             var reservations = await _context.Reservations
                 .Include(r => r.User)
                 .Include(r => r.Rooms)
@@ -64,8 +62,7 @@ namespace HotelGuru.Services
                 }
             }
 
-            // Mark reservation as confirmed (we'd need to add a Status field)
-            // For now, we'll just ensure the rooms are marked as not available
+            // Mark reservation as confirmed            
             foreach (var room in reservation.Rooms)
             {
                 room.Available = false; 
@@ -90,8 +87,7 @@ namespace HotelGuru.Services
                 throw new InvalidOperationException("Cannot check in: reservation is not for today.");
             }
 
-            // Update reservation status (would need a Status field)
-            // For now, we'll just ensure rooms are marked properly
+            // Update reservation status
             foreach (var room in reservation.Rooms)
             {
                 room.Available = false;

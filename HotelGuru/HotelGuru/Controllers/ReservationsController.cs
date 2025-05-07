@@ -8,7 +8,7 @@ namespace HotelGuru.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize] // Require authentication for all endpoints
+    [Authorize]
     public class ReservationsController : ControllerBase
     {
         private readonly IReservationService _reservationService;
@@ -41,10 +41,8 @@ namespace HotelGuru.Controllers
             var userRoles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
 
             // Staff can view any reservation, users can only view their own
-            if (!userRoles.Any(r => r == "Admin" || r == "Receptionist" || r == "Manager"))
+            if (!userRoles.Any(r => r == "Admin" || r == "Receptionist"))
             {
-                // Simple authorization check - in a real app, you'd want to check if this reservation belongs to the user
-                // This would require extending the DTO to include the user ID
                 var userReservations = await _reservationService.GetUserReservationsAsync(userId);
                 if (!userReservations.Any(r => r.Id == id))
                 {
@@ -95,7 +93,7 @@ namespace HotelGuru.Controllers
 
                 // Staff can cancel any reservation, users can only cancel their own
                 var userRoles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
-                if (!userRoles.Any(r => r == "Admin" || r == "Receptionist" || r == "Manager"))
+                if (!userRoles.Any(r => r == "Admin" || r == "Receptionist"))
                 {
                     // Check if this reservation belongs to the user
                     var userReservations = await _reservationService.GetUserReservationsAsync(userId);
@@ -124,7 +122,7 @@ namespace HotelGuru.Controllers
             // Check if the requesting user is the same as the userId parameter or has staff role
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
             var userRoles = User.FindAll(ClaimTypes.Role).Select(c => c.Value);
-            var isStaff = userRoles.Any(r => r == "Admin" || r == "Receptionist" || r == "Manager");
+            var isStaff = userRoles.Any(r => r == "Admin" || r == "Receptionist");
 
             // Regular users can only see their own reservations
             if (!isStaff && int.Parse(userIdClaim.Value) != userId)

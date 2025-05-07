@@ -17,7 +17,7 @@ namespace HotelGuru
             // Check if there is any data already
             if (context.Users.Any())
             {
-                return; // Database already has data
+                return;
             }
 
             // Create roles

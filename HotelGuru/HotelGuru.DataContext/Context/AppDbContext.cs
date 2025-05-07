@@ -46,23 +46,22 @@ namespace HotelGuru.DataContext.Context
             modelBuilder.Entity<Room>()
                 .HasOne(r => r.Reservation)
                 .WithMany(r => r.Rooms)
-                .HasForeignKey(r => r.ReservationId)  // Using ReservationId instead of Id as FK
-                .IsRequired(false)  // Optional relationship
-                .OnDelete(DeleteBehavior.SetNull);  // Set to null on delete
+                .HasForeignKey(r => r.ReservationId)
+                .IsRequired(false)  
+                .OnDelete(DeleteBehavior.SetNull);  
 
             modelBuilder.Entity<ExtraService>()
                 .HasOne(e => e.Invoice)
                 .WithMany()
                 .HasForeignKey(e => e.InvoiceId)
-                .IsRequired(false)  // Optional relationship
-                .OnDelete(DeleteBehavior.SetNull);  // Set to null on delete
+                .IsRequired(false)  
+                .OnDelete(DeleteBehavior.SetNull); 
 
             modelBuilder.Entity<Invoice>()
                 .HasOne(i => i.Reservation)
                 .WithOne(r => r.Invoice)
                 .HasForeignKey<Invoice>(i => i.ReservationId);
 
-            // In AppDbContext.cs, add to OnModelCreating method:
 
             // Set decimal field precision
             modelBuilder.Entity<Room>()
@@ -77,8 +76,6 @@ namespace HotelGuru.DataContext.Context
             modelBuilder.Entity<Reservation>()
                 .Property(e => e.Id)
                 .HasColumnName("Id");
-
-            // Additional relationships and configurations...
         }
     }
 }

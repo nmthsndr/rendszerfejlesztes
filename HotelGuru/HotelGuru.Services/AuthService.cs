@@ -60,10 +60,8 @@ namespace HotelGuru.Services
             if (await _context.Users.AnyAsync(u => u.Email == registerDto.Email))
                 throw new InvalidOperationException("Email already exists");
 
-            // Create password hash
             CreatePasswordHash(registerDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            // Create new user
             var user = new User
             {
                 Name = registerDto.Username,
@@ -84,13 +82,13 @@ namespace HotelGuru.Services
             }
             else
             {
-                // Assign default "Customer" role if no roles specified
+                // Assign default "Guest" role if no roles specified
                 var defaultRole = await _context.Roles
-                    .FirstOrDefaultAsync(r => r.Name == "Customer");
+                    .FirstOrDefaultAsync(r => r.Name == "Guest");
 
                 if (defaultRole == null)
                 {
-                    defaultRole = new Role { Name = "Customer" };
+                    defaultRole = new Role { Name = "Guest" };
                     _context.Roles.Add(defaultRole);
                     await _context.SaveChangesAsync();
                 }

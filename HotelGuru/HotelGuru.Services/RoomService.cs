@@ -67,7 +67,6 @@ namespace HotelGuru.Services
             // Filter to available rooms for the specified dates
             var availableRooms = allRooms.Where(room =>
             {
-                // Room is marked as available
                 if (!room.Available)
                     return false;
 

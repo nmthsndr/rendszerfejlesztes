@@ -103,12 +103,11 @@ namespace HotelGuru.Services
                 foreach (var room in rooms)
                 {
                     room.ReservationId = reservation.Id;
-                    room.Available = false; // Mark the room as unavailable
+                    room.Available = false;
                 }
 
                 await _context.SaveChangesAsync();
 
-                // Commit the transaction
                 await transaction.CommitAsync();
 
                 // Return the created reservation
@@ -138,10 +137,10 @@ namespace HotelGuru.Services
             if (reservation == null)
                 return false;
 
-            // Check if cancellation is allowed (e.g., 24 hours before start date)
-            if (reservation.StartDate <= DateTime.Now.AddHours(24))
+            // Check if cancellation is allowed
+            if (reservation.StartDate <= DateTime.Now.AddHours(168))
             {
-                throw new InvalidOperationException("Cannot cancel reservation less than 24 hours before start date.");
+                throw new InvalidOperationException("Cannot cancel reservation less than a week before start date.");
             }
 
             // Start transaction
@@ -160,7 +159,6 @@ namespace HotelGuru.Services
                 _context.Reservations.Remove(reservation);
                 await _context.SaveChangesAsync();
 
-                // Commit the transaction
                 await transaction.CommitAsync();
 
                 return true;
@@ -186,7 +184,6 @@ namespace HotelGuru.Services
             return _mapper.Map<IEnumerable<ReservationDto>>(reservations);
         }
 
-        // Helper method to check room availability
         private async Task<bool> IsRoomAvailable(int roomId, DateTime startDate, DateTime endDate)
         {
             // Check if the room exists and is available
