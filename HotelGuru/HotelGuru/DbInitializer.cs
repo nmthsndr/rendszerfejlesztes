@@ -22,11 +22,10 @@ namespace HotelGuru
 
             // Create roles
             var adminRole = new Role { Name = "Admin" };
-            var managerRole = new Role { Name = "Manager" };
             var receptionistRole = new Role { Name = "Receptionist" };
-            var customerRole = new Role { Name = "Customer" };
+            var guestRole = new Role { Name = "Guest" };
 
-            context.Roles.AddRange(adminRole, managerRole, receptionistRole, customerRole);
+            context.Roles.AddRange(adminRole,receptionistRole, guestRole);
             context.SaveChanges();
 
             // Create users with hashed passwords
@@ -45,20 +44,7 @@ namespace HotelGuru
                 Address = new List<Address>()
             };
             users.Add(adminUser);
-
-            // Manager user
-            CreatePasswordHash("manager123", out byte[] managerPasswordHash, out byte[] managerPasswordSalt);
-            var managerUser = new User
-            {
-                Name = "Manager User",
-                Email = "manager@hotelguru.com",
-                Phone = "+1234567891",
-                PasswordHash = managerPasswordHash,
-                PasswordSalt = managerPasswordSalt,
-                Roles = new List<Role> { managerRole },
-                Address = new List<Address>()
-            };
-            users.Add(managerUser);
+       
 
             // Receptionist user
             CreatePasswordHash("receptionist123", out byte[] receptionistPasswordHash, out byte[] receptionistPasswordSalt);
@@ -74,19 +60,19 @@ namespace HotelGuru
             };
             users.Add(receptionistUser);
 
-            // Customer user
-            CreatePasswordHash("customer123", out byte[] customerPasswordHash, out byte[] customerPasswordSalt);
-            var customerUser = new User
+            // guest user
+            CreatePasswordHash("guest123", out byte[] guestPasswordHash, out byte[] guestPasswordSalt);
+            var guestUser = new User
             {
-                Name = "Customer User",
-                Email = "customer@example.com",
+                Name = "Guest User",
+                Email = "guest@example.com",
                 Phone = "+1234567893",
-                PasswordHash = customerPasswordHash,
-                PasswordSalt = customerPasswordSalt,
-                Roles = new List<Role> { customerRole },
+                PasswordHash = guestPasswordHash,
+                PasswordSalt = guestPasswordSalt,
+                Roles = new List<Role> { guestRole },
                 Address = new List<Address>()
             };
-            users.Add(customerUser);
+            users.Add(guestUser);
 
             context.Users.AddRange(users);
             context.SaveChanges();
@@ -100,7 +86,7 @@ namespace HotelGuru
                     City = "New York",
                     Street = "5th Avenue",
                     HouseNumber = 123,
-                    UserId = customerUser.Id
+                    UserId = guestUser.Id
                 },
                 new Address
                 {
@@ -265,7 +251,7 @@ namespace HotelGuru
                 StartDate = startDate,
                 EndDate = endDate,
                 PaymentMethod = "Credit Card",
-                UserId = customerUser.Id,
+                UserId = guestUser.Id,
                 Rooms = new List<Room> { rooms[0] }
             };
 
